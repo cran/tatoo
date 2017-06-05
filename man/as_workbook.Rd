@@ -36,7 +36,7 @@ This function converts Tatoo_table obects directly to \link{openxlsx} Workbook
 objects. For information about additional parameters please refer to the
 documentation of \code{write_worksheet()}, for which \code{as_workbook()}
 is just a wraper. Additional possible function arguments way vary depending
-on depending which Tatoo_table you want to export.
+on which Tatoo_table you want to export.
 
 Converting a \code{Tatoo_report} will result in a \code{Workbook} with
 several sheets. The sheet names will be generated from the names of

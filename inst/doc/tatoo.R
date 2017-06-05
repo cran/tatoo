@@ -1,5 +1,5 @@
 ## ----message=FALSE, warning=FALSE----------------------------------------
-library(dplyr)
+library(magrittr)
 library(tatoo)
 
 ## ------------------------------------------------------------------------
