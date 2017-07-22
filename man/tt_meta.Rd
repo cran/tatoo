@@ -28,7 +28,7 @@ a TT_meta object.
 \description{
 Create a \code{TT_meta} (tagged table metadata) object. In the future,
 different styling will be supported for title, longtitle and subtitle to
-make the distinction more meaningfull.
+make the distinction more meaningful.
 }
 \seealso{
 \link{Tagged_table}

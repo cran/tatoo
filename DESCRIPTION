@@ -1,7 +1,7 @@
 Package: tatoo
 Type: Package
 Title: Combine and Export Data Frames
-Version: 1.0.6
+Version: 1.0.7
 Authors@R: person("Stefan", "Fleck", email = "stefan.b.fleck@gmail.com", role = c("aut", "cre"))
 Maintainer: Stefan Fleck <stefan.b.fleck@gmail.com>
 Description: 
@@ -13,13 +13,13 @@ Description:
 License: MIT + file LICENSE
 LazyData: TRUE
 Imports: assertthat, magrittr, data.table, openxlsx (>= 4.0.0), purrr,
-        stringi, utils
+        rlang, stringi, utils
 Suggests: testthat, knitr, rmarkdown
 RoxygenNote: 6.0.1
 Encoding: UTF-8
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2017-06-04 22:12:10 UTC; hoelk
+Packaged: 2017-07-21 22:16:49 UTC; hoelk
 Author: Stefan Fleck [aut, cre]
 Repository: CRAN
-Date/Publication: 2017-06-05 07:29:01 UTC
+Date/Publication: 2017-07-22 13:04:09 UTC

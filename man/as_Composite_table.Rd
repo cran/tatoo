@@ -2,26 +2,38 @@
 % Please edit documentation in R/Composite_table.R
 \name{as_Composite_table}
 \alias{as_Composite_table}
+\alias{as_Composite_table.Mashed_table}
+\alias{as_Composite_table.data.frame}
 \alias{is_Composite_table}
 \title{Coerce to Composite Table}
 \usage{
-as_Composite_table(dat, id_vars, meta)
+as_Composite_table(dat, ...)
+
+\method{as_Composite_table}{Mashed_table}(dat, id_vars = attr(dat, "id_vars"),
+  meta = attr(dat, "meta"), ...)
+
+\method{as_Composite_table}{data.frame}(dat, sep = ".", reverse = FALSE,
+  ...)
 
 is_Composite_table(dat, ...)
 }
 \arguments{
 \item{dat}{any R object}
 
+\item{...}{ignored}
+
 \item{id_vars}{If id_vars is specified, the tables will be combined
 using \code{\link[=merge]{merge()}} on the columns specified in id_vars, otherwise
 the tables will be combined with \code{\link[=cbind]{cbind()}}.}
 
-\item{meta}{a \link{TT_meta} object. If speciefied, the resulting
+\item{meta}{a \link{TT_meta} object. If specified, the resulting
 Composite_table will be wrapped in a \link{Tagged_table}.}
 
-\item{...}{\code{comp_table} only: individual data.frames. A name can be
-provided for each data.frame that will be used by \link{print} and
-\code{\link[=as_workbook]{as_workbook()}} to create multi-table headings.}
+\item{sep}{a scalar character. Separator in the column names of \code{dat} that
+separates the column name from the multi-column name.}
+
+\item{reverse}{logical. if \code{FALSE} the part after the last occurrence of \code{sep}
+will be used as multiname, if \code{TRUE} the part before will be used.}
 }
 \value{
 \code{as_Composte_table()} returns a Composite_table
@@ -30,5 +42,31 @@ provided for each data.frame that will be used by \link{print} and
 and \code{FALSE} otherwise.
 }
 \description{
-Coerce to Composite Table
+Converts other R objects to Composite Tables by automatically creating
+multi-column names from the properties of the objects.
+
+\code{as_Composite_table.Mashed_table()} extracts the multi-column names from the
+column names of the individual data.frames that make up a \link{Mashed_table},
+and the column names from the names of the Mashed Table.
+
+\code{as_Composite_table.data.frame()} extracts the multi-column names from the
+column names of a \code{data.frame} based on a separator.
+}
+\examples{
+
+mash_table(
+  head = head(cars),
+  tail = tail(cars),
+  mash_method = 'col'
+)
+
+
+as_Composite_table(data.frame(
+  apple.fruit = 1,
+  kiwi.fruit = 2,
+  dog.animal = 1,
+  black.cat.animal = 2,
+  parrot.animal = 3
+))
+
 }

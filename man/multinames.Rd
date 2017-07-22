@@ -13,7 +13,7 @@ multinames(dat)
 \item{dat}{a Composite_table or data.frame}
 
 \item{value}{a named vector of ascending integers. The name is the
-multi-column heading, the integer value is the last colum that this
+multi-column heading, the integer value is the last column that this
 heading applies to}
 }
 \description{
@@ -38,5 +38,5 @@ multinames(df_mean) = c('species' = 1, measures = 3)
 
 }
 \seealso{
-\link{Composite_table}
+\link{Composite_table}, \code{\link[=as_multinames]{as_multinames()}}
 }

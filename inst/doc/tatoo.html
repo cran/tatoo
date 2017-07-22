@@ -12,9 +12,9 @@
 
 <meta name="author" content="Stefan Fleck" />
 
-<meta name="date" content="2017-06-05" />
+<meta name="date" content="2017-07-22" />
 
-<title>Tatoo package vignette</title>
+<title>tatoo package vignette</title>
 
 
 
@@ -68,9 +68,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 
-<h1 class="title toc-ignore">Tatoo package vignette</h1>
+<h1 class="title toc-ignore">tatoo package vignette</h1>
 <h4 class="author"><em>Stefan Fleck</em></h4>
-<h4 class="date"><em>2017-06-05</em></h4>
+<h4 class="date"><em>2017-07-22</em></h4>
 
 
 <div id="TOC">
@@ -94,7 +94,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="kw">library</span>(tatoo)</code></pre></div>
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
-<p>Tatoo (“Table Tools”) functions to combine data.frames in ways that require additional effort in base R, and to add metadata (id, title, …) that can be used for printing and xlsx export. The Tatoo_report class is provided as a convenient helper to write several such tables to a workbook, one table per worksheet.</p>
+<p>tatoo (“table tools”) functions to combine data.frames in ways that require additional effort in base R, and to add metadata (id, title, …) that can be used for printing and xlsx export. The Tatoo_report class is provided as a convenient helper to write several such tables to a workbook, one table per worksheet.</p>
 <p>Tatoo tables and reports can directly be saved to .xlsx files, or convert to <code>Workbook</code> objects with <code>as_workbook()</code> so that you can process them further using the <em>openxlsx</em> package. While tatoo implements convenient print methods so that you can preview the tables you created in the console, most of the functionality provided by this package only makes real sense for xlsx export.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
   <span class="dt">Species =</span> <span class="kw">c</span>(<span class="st">&quot;setosa&quot;</span>, <span class="st">&quot;versicolor&quot;</span>, <span class="st">&quot;virginica&quot;</span>),
@@ -144,7 +144,7 @@ tagged_table &lt;-<span class="st"> </span><span class="kw">tag_table</span>(
 ## This table was created from the iris dataset
 ## It consists of 3 different types of irises’
 ## (Setosa, Versicolour, and Virginica)</code></pre>
-<p>Metdata cann also be assigned an modified via set function.</p>
+<p>Metadata cann also be assigned an modified via set function.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">meta</span>(df1)  &lt;-<span class="st"> </span>ex_meta <span class="co"># df1 gets automatically converted to a Tagged_table</span>
 
 <span class="kw">title</span>(df1) &lt;-<span class="st"> 'A table with a title'</span>
@@ -235,7 +235,7 @@ mashed_table &lt;-<span class="st"> </span><span class="kw">mash_table_list</spa
 ## 2     setosa     5.01   0.35     3.43   0.38     
 ## 3 versicolor     5.94   0.52     2.77   0.31     
 ## 4  virginica     6.59   0.64     2.97   0.32</code></pre>
-<p>You can also direclty override the display parameters saved in the Mashed_table object for printing and xlsx export</p>
+<p>You can also directly override the display parameters saved in the Mashed_table object for printing and xlsx export</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(mashed_table, <span class="dt">mash_method =</span> <span class="st">'row'</span>, <span class="dt">insert_blank_row =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## A mashed table
 ## Two or more tables mashed together so that rows or columns alternate 

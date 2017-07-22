@@ -20,7 +20,7 @@ provided for each data.frame that will be used by \link{print} and
 using \code{\link[=merge]{merge()}} on the columns specified in id_vars, otherwise
 the tables will be combined with \code{\link[=cbind]{cbind()}}.}
 
-\item{meta}{a \link{TT_meta} object. If speciefied, the resulting
+\item{meta}{a \link{TT_meta} object. If specified, the resulting
 Composite_table will be wrapped in a \link{Tagged_table}.}
 
 \item{tables}{\code{comp_table_list} only: A named list of data.frames with
@@ -67,7 +67,7 @@ comp_table(mean = df_mean, sd = df_sd, id_vars = 'Species')
 \seealso{
 Attribute setter: \link{multinames<-}
 
-Other Tatto tables: \code{\link{mash_table}},
+Other Tatoo tables: \code{\link{mash_table}},
   \code{\link{stack_table}}, \code{\link{tag_table}},
   \code{\link{tatoo_table}}
 }

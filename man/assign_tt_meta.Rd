@@ -13,5 +13,5 @@ assign_tt_meta(dat, assignment)
 `list(longtitle = value)`}
 }
 \description{
-Internal function used by the metdata set functions
+Internal function used by the metadata set functions
 }

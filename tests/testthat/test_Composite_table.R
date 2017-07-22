@@ -82,6 +82,68 @@ test_that("Composite_table names get assigned correctly", {
 
 
 
+
+
+test_that("as_multinames works", {
+  tdat = c('a', 'a', 'b', 'b', 'b')
+
+  expect_identical(
+    as_multinames(tdat),
+    structure(c(2L, 5L), .Names = c("a", "b"))
+  )
+})
+
+
+
+test_that("flip_names works", {
+
+  source(file.path(test_path(), 'testdata', 'testdata.R'))
+
+  expect_identical(
+    names(flip_names(t_comp_1)),
+    c("tab1", "tab2", "tab3", "tab1", "tab2", "tab3", "tab1", "tab2",
+      "tab3")
+  )
+
+  data.table::setnames(t_comp_2, 'id', 'zz')
+
+
+  expect_identical(
+    names(flip_names(t_comp_2, id_vars = 'zz')),
+    c("zz", "tab1", "tab2", "tab3", "tab1", "tab2", "tab3")
+  )
+})
+
+
+
+
+test_that("as.data.table.Composite_table works as expected", {
+  #* @testing as_Composite_table.data.table
+
+  tdat = data.table::data.table(
+    a.foo = 1:4,
+    b.foo = 4:7,
+    c   = 10:13,
+    b.a.bar = 1:4,
+    b.b.bar = 4:7
+  )
+
+  expect_silent(tres <- as_Composite_table(tdat))
+
+  expect_identical(
+    names(tres),
+    c("a", "b", "c", "b.a", "b.b")
+  )
+
+  expect_identical(
+    multinames(tres),
+    structure(c(2L, 3L, 5L), .Names = c("foo", "", "bar"))
+  )
+})
+
+
+
+
 test_that("as.data.table.Composite_table works as expected", {
   #* @testing as.data.frame.Composite_table
   #* @testing as.data.table.Composite_table
@@ -90,8 +152,8 @@ test_that("as.data.table.Composite_table works as expected", {
 
   expect_identical(
     names(data.table::as.data.table(t_comp_1, multinames = TRUE)),
-    c("tab1.id", "tab1.small", "tab1.tall", "tab2.id", "tab2.small",
-      "tab2.tall", "tab3.id", "tab3.small", "tab3.tall")
+    c("id.tab1", "small.tab1", "tall.tab1", "id.tab2", "small.tab2",
+      "tall.tab2", "id.tab3", "small.tab3", "tall.tab3")
   )
 
   expect_identical(
@@ -101,8 +163,8 @@ test_that("as.data.table.Composite_table works as expected", {
 
   expect_identical(
     names(data.table::as.data.table(t_comp_2)),
-    c("id", "tab1.small", "tab1.tall", "tab2.small", "tab2.tall",
-      "tab3.small", "tab3.tall")
+    c("id", "small.tab1", "tall.tab1", "small.tab2", "tall.tab2",
+      "small.tab3", "tall.tab3")
   )
 
   expect_identical(
@@ -110,3 +172,20 @@ test_that("as.data.table.Composite_table works as expected", {
     names(t_comp_2)
   )
 })
+
+
+
+
+test_that("print does not fail on invalid composite tables without multinames", {
+  #* @testing as.data.frame.Composite_table
+  #* @testing as.data.table.Composite_table
+
+  source(file.path(test_path(), 'testdata', 'testdata.R'))
+  attr(t_comp_1, 'multinames') <- NULL
+
+  expect_warning(
+    expect_output(print(t_comp_1)),
+    'is not a valid composite table'
+  )
+})
+

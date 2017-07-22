@@ -11,8 +11,8 @@ cmash(..., rem_ext = NULL, id_vars = NULL, suffixes = names(list(...)),
   meta = NULL)
 }
 \arguments{
-\item{...}{either several \code{data.frames} or a single \link{Mashed_table}.
-All \code{data.frames} must have the same number of columns.}
+\item{...}{either several \code{data.frames}, \code{data.table}s or a single
+\link{Mashed_table}. All \code{data.frames} must have the same number of columns.}
 
 \item{rem_ext}{\code{character}. For \code{mash_table} to work, the column names of all
 elements of \code{dat} must be identical. Sometimes you will have the situation
@@ -41,9 +41,9 @@ or if \code{meta} is supplied;
 else a \code{data.frame}.
 }
 \description{
-\code{rmash} and \code{cmash} are convience function to mash \code{data.frames} together
+\code{rmash} and \code{cmash} are convenience function to mash \code{data.frames} together
 with a single command. They behave similar to \code{\link[=cbind]{cbind()}} and
-\code{\link[=rbind]{rbind()}}, just that the result will have have alternating rows/colums.
+\code{\link[=rbind]{rbind()}}, just that the result will have have alternating rows/columns.
 }
 \examples{
 

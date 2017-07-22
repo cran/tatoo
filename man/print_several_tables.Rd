@@ -10,9 +10,9 @@ print_several_tables(dat, indent, sep1, sep2, headings = NULL, ...)
 \item{dat}{A \code{list} of objects that can be printed, usually \code{data.frame}s
 or \code{Tatoo_table}s}
 
-\item{indent}{a scalar character specifing the indent symbols (e.g. "  ")}
+\item{indent}{a scalar character specifying the indent symbols (e.g. "  ")}
 
-\item{sep1}{\code{character} or \code{numeric}. Seperator above the first and
+\item{sep1}{\code{character} or \code{numeric}. Separator above the first and
 below the last table.  If character a sep line is created using this
 character (i.e. ------). If numeric, that many blank rows are inserted.}
 
@@ -20,7 +20,7 @@ character (i.e. ------). If numeric, that many blank rows are inserted.}
 Like \code{sep1}}
 
 \item{headings}{\code{character} vector of the same length as \code{dat},
-specifiying headings to be inserted above each table.}
+specifying headings to be inserted above each table.}
 
 \item{...}{passed on to \code{\link{print}}}
 }

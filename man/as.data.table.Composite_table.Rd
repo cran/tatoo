@@ -17,7 +17,7 @@
 \item{multinames}{logical. Whether to prepend multinames before the column
 names}
 
-\item{sep}{sepparator between multinames and individual column names}
+\item{sep}{separator between multinames and individual column names}
 
 \item{...}{ignored}
 

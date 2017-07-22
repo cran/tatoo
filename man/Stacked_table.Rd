@@ -24,7 +24,7 @@ xlsx}
 just that a list can be supplied instead of individual arguments.}
 }
 \value{
-a Stacked_table: a list of Tatoo_tables with additonal
+a Stacked_table: a list of Tatoo_tables with additional
 \code{spacing} attribute that controls the default spacing between the tables
 when it is exported.
 }
@@ -61,7 +61,7 @@ stack_table(df1, df2)
 \seealso{
 Attribute setter: \link{spacing<-}
 
-Other Tatto tables: \code{\link{comp_table}},
+Other Tatoo tables: \code{\link{comp_table}},
   \code{\link{mash_table}}, \code{\link{tag_table}},
   \code{\link{tatoo_table}}
 }

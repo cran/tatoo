@@ -14,7 +14,7 @@
 #'
 #' @param dat A `Tatto_table` object or anything that can be coerced to a
 #' `\link{data.table}` with `as.data.table()`
-#' @param meta a [tt_meta] object. Metdata can also be set and modified
+#' @param meta a [tt_meta] object. Metadata can also be set and modified
 #'   using setters (see [meta()])
 #'
 #' @return a `Tagged_table`: a `Tatoo_table` with an additional `meta`
@@ -22,7 +22,7 @@
 #'
 #' @md
 #' @aliases Tagged_table tagged_table tag_table
-#' @family Tatto tables
+#' @family Tatoo tables
 #' @seealso Attribute setters: [meta<-]
 #' @seealso Tagged Table Metadata: [tt_meta]
 #' @rdname Tagged_table
@@ -41,7 +41,7 @@
 #'   longtitle = "grades of the final examination"
 #' )
 #'
-#' # Metdata can be assign in a formal way or via set functions
+#' # Metadata can be assign in a formal way or via set functions
 #' dat <- tag_table(dat,  meta = table_metadata)
 #' meta(dat) <- table_metadata
 #'
@@ -115,7 +115,7 @@ Tagged_table <- function(
 #'
 #' Create a `TT_meta` (tagged table metadata) object. In the future,
 #' different styling will be supported for title, longtitle and subtitle to
-#' make the distinction more meaningfull.
+#' make the distinction more meaningful.
 #'
 #' @param table_id A scalar (will be coerced to `character`)
 #' @param title A scalar (will be coerced to `character`)
@@ -140,12 +140,12 @@ tt_meta <- function(
   subtitle = NULL,
   footer = NULL
 ){
-  assert_that(purrr::is_scalar_atomic(table_id) || is.null(table_id))
-  assert_that(purrr::is_scalar_atomic(title) || is.null(title))
+  assert_that(rlang::is_scalar_atomic(table_id) || is.null(table_id))
+  assert_that(rlang::is_scalar_atomic(title) || is.null(title))
 
-  assert_that(is.null(longtitle) ||purrr::is_atomic(longtitle))
-  assert_that(is.null(subtitle) || purrr::is_atomic(subtitle))
-  assert_that(is.null(footer) || purrr::is_atomic(footer))
+  assert_that(is.null(longtitle) || rlang::is_atomic(longtitle))
+  assert_that(is.null(subtitle)  || rlang::is_atomic(subtitle))
+  assert_that(is.null(footer)    || rlang::is_atomic(footer))
 
   if(all(
       is.null(table_id),
@@ -234,7 +234,7 @@ is_valid.TT_meta <- function(dat){
 
 
 
-#' Printing Tagged Table Metdata
+#' Printing Tagged Table Metadata
 #'
 #' @param x A \code{TT_meta} object
 #' @param ... ignored
@@ -339,14 +339,14 @@ meta <- function(dat){
 
 #' Assign tt_meta elements
 #'
-#' Internal function used by the metdata set functions
+#' Internal function used by the metadata set functions
 #'
 #' @param dat a [Tatoo_table] or data.frame
 #' @param assignment A named list of length one, for example
 #'   `list(longtitle = value)`
 #'
 assign_tt_meta <- function(dat, assignment){
-  assert_that(purrr::is_scalar_list(assignment))
+  assert_that(rlang::is_scalar_list(assignment))
   assert_that(identical(
     length(names(assignment)), 1L
   ))

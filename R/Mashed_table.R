@@ -33,14 +33,14 @@
 #'   that column names are identical except for a suffix, such as `length` and
 #'   `lenght.sd`. The `rem_ext` option can be used to remove such suffixes.
 #'
-#' @return a `Mashed_table`: a `list` of `data.table`s with additonal
+#' @return a `Mashed_table`: a `list` of `data.table`s with additional
 #'   `mash_method`, `insert_blank_row` and `sep_height` attributes, that
 #'   influence how the table looks when it is printed or exported.
 #'
 #' @md
 #' @rdname Mashed_table
 #' @aliases Mashed_table mashed_table mash_table
-#' @family Tatto tables
+#' @family Tatoo tables
 #' @seealso Attribute setters: [mash_method<-]
 #' @export
 #'
@@ -152,7 +152,7 @@ mash_table_list <- function(
 
   assert_that(
     is.null(rem_ext) ||
-      purrr::is_scalar_character(rem_ext)
+      rlang::is_scalar_character(rem_ext)
   )
 
 
@@ -241,10 +241,10 @@ is_valid.Mashed_table <- function(dat){
     is_list          = is.list(dat),
     mash_method      = identical(attr(dat, 'mash_method'), 'row') ||
                        identical(attr(dat, 'mash_method'), 'col'),
-    id_vars               = is.null(attr(dat, 'id_vars')) ||
+    id_vars          = is.null(attr(dat, 'id_vars')) ||
                        is.character(attr(dat, 'id_vars')),
     insert_blank_row = is.flag(attr(dat, 'insert_blank_row')),
-    sep_height       = purrr::is_scalar_integer(attr(dat, 'sep_height'))
+    sep_height       = rlang::is_scalar_integer(attr(dat, 'sep_height'))
   )
 
   all_with_warning(res)
@@ -364,7 +364,7 @@ as.data.table.Mashed_table <- function(
   id_vars = attr(dat, 'id_vars'),
   suffixes = names(dat)
 ){
-  assert_that(purrr::is_scalar_character(mash_method))
+  assert_that(rlang::is_scalar_character(mash_method))
   assert_that(is.flag(insert_blank_row))
   assert_that(is.null(id_vars) || is.character(id_vars))
   assert_that(is.null(suffixes) || is.character(suffixes) )
@@ -412,12 +412,12 @@ as.data.frame.Mashed_table <- function(
 
 #' Mash R objects by Rows or Columns
 #'
-#' `rmash` and `cmash` are convience function to mash `data.frames` together
+#' `rmash` and `cmash` are convenience function to mash `data.frames` together
 #' with a single command. They behave similar to [cbind()] and
-#' [rbind()], just that the result will have have alternating rows/colums.
+#' [rbind()], just that the result will have have alternating rows/columns.
 #'
-#' @param ... either several \code{data.frames} or a single [Mashed_table].
-#'   All `data.frames` must have the same number of columns.
+#' @param ... either several `data.frames`, `data.table`s or a single
+#'   [Mashed_table]. All `data.frames` must have the same number of columns.
 #' @inheritParams mash_table
 #' @inheritParams as.data.table.Mashed_table
 #'
@@ -471,7 +471,7 @@ rmash <- function(
   dots <- list(...)
 
   input_is_Mashed_table <-
-    purrr::is_scalar_list(dots)
+    rlang::is_scalar_list(dots)
     is_Mashed_table(dots)
 
   if(input_is_Mashed_table){
@@ -490,7 +490,7 @@ rmash <- function(
       as.data.table()
   }
 
-  input_contains_dt <- lapply(dots, tt_or_dt) %>%
+  input_contains_dt <- lapply(dots, is_tt_or_dt) %>%
     unlist() %>%
     any()
 
@@ -519,7 +519,7 @@ cmash <- function(
 
 
   input_is_Mashed_table <-
-    purrr::is_scalar_list(dots)
+    rlang::is_scalar_list(dots)
     is_Mashed_table(dots)
 
   if(input_is_Mashed_table){
@@ -536,7 +536,7 @@ cmash <- function(
   }
 
 
-  input_contains_dt <- lapply(dots, tt_or_dt) %>%
+  input_contains_dt <- lapply(dots, is_tt_or_dt) %>%
     unlist() %>%
     any()
 
@@ -553,7 +553,6 @@ cmash <- function(
 
 
 # Setters -----------------------------------------------------------------
-
 
 #' Set mash attributes of a Mashed Table
 #'
@@ -611,6 +610,7 @@ cmash <- function(
   data.table::setattr(res, 'id_vars', value)
   return(res)
 }
+
 
 
 
@@ -770,6 +770,6 @@ mash_cols <- function(
 
 
 
-tt_or_dt <- function(x) {
+is_tt_or_dt <- function(x) {
   data.table::is.data.table(x) || is_Tatoo_table(x)
 }

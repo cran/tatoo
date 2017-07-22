@@ -46,6 +46,7 @@ all_are_distinct <- function(x, empty_value = FALSE, silent = FALSE){
 
 
 
+
 # assert valid ------------------------------------------------------------
 
 is_valid <- function(x, ...) {
@@ -67,6 +68,8 @@ assert_valid <- function(dat, ...){
 }
 
 
+
+
 assert_valid_error  <- function(obj) {
   msg <- sprintf(
     'A validity check failed for object of class: %s.',
@@ -79,12 +82,13 @@ assert_valid_error  <- function(obj) {
 
 
 
+
 # assertions --------------------------------------------------------------
 
 #' Check if object is of a certain class
 #'
-#' These functions are desinged to be used in combination with the assertthat
-#' pacakge
+#' These functions are designed to be used in combination with the assertthat
+#' package
 #'
 #' is_class returns TRUE/FALSE. It comes with a on_failure function and
 #' is designed to be used in conjunction with the assertthat package.
@@ -98,6 +102,8 @@ assert_valid_error  <- function(obj) {
 is_class <- function(dat, class){
   class %in% class(dat)
 }
+
+
 
 
 on_failure(is_class) <- function(call, env){
@@ -114,6 +120,8 @@ on_failure(is_class) <- function(call, env){
 assert_class <- function(dat, class){
   assert_that(is_class(dat = dat, class = class))
 }
+
+
 
 
 #' @rdname is_class
@@ -134,6 +142,8 @@ assert_class <- function(dat, class){
 is_any_class <- function(dat, choices){
   any(choices %in% class(dat))
 }
+
+
 
 
 on_failure(is_any_class) <- function(call, env){
@@ -186,6 +196,8 @@ is_col_classes <- function(dat, classes, method = 'identical'){
 
   all_with_warning(res)
 }
+
+
 
 
 assertthat::on_failure(is_col_classes) <- function(call, env){
@@ -245,7 +257,14 @@ cfun <- function(x){
   return(res)
 }
 
+
+
+
 as.numeric2   <- function(x) as.numeric(as.character(x))
+
+
+
+
 as.integer2   <- function(x) as.integer(as.character(x))
 
 
@@ -278,7 +297,6 @@ all_with_warning <- function(dat){
     return(FALSE)
   }
 }
-
 
 
 
@@ -325,7 +343,6 @@ df_typecast_all <- function(dat, from = 'factor', to = 'character'){
 
 
 
-
 #' Check if a value looks like integer
 #'
 #' @param x ...
@@ -364,9 +381,47 @@ str_nobreak <- function(x){
 
 
 
+
 condition <- function(subclass, message, call = sys.call(-1), ...) {
   structure(
     class = c(subclass, "condition"),
     list(message = message, call = call, ...)
   )
+}
+
+
+
+
+#' Rearrange vector based on priorities
+#'
+#' Shoves elements of a character vector to the front or back.
+#' Throws a warning if any elements of `high` or `low` are not present in `x`.
+#'
+#' @param x a character vector
+#' @param high elements to be put to the front
+#' @param low elements to be put to the back
+#'
+#' @return a reordered vector
+#'
+vec_prioritise <- function(x, high = NULL, low = NULL){
+  low_not_x  <- low[!low %in% x]
+  high_not_x <- high[!high %in% x]
+
+  if(!all(low  %in% x)) {
+    warning(
+      'Not all "low" are present in "x": ',
+      paste(low_not_x, collapse = ' '))
+  }
+  if(!all(high %in% x)){
+    warning(
+      'Not all "high" are present in "x": ',
+      paste(high_not_x, collapse = ' '))
+  }
+
+  low      <- low[low %in% x]
+  high     <- high[high %in% x]
+  mid      <- x[!x %in% c(high, low)]
+  ordered  <- c(high, mid, low)
+
+  return(ordered)
 }

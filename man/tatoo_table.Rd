@@ -21,7 +21,7 @@ be exported via \code{\link[=as_workbook]{as_workbook()}}/\code{\link[=save_xlsx
 latex and html export is also planned.
 }
 \details{
-Currenlty, the following subclasses exists:
+Currently, the following subclasses exists:
 \itemize{
 \item \link{Tagged_table}
 \item \link{Composite_table}
@@ -34,7 +34,7 @@ will not need to use it except if your planning on extending this package
 with your own code.
 }
 \seealso{
-Other Tatto tables: \code{\link{comp_table}},
+Other Tatoo tables: \code{\link{comp_table}},
   \code{\link{mash_table}}, \code{\link{stack_table}},
   \code{\link{tag_table}}
 }

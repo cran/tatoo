@@ -5,7 +5,7 @@
 \alias{as_workbook.default}
 \alias{as_workbook.Tatoo_report}
 \alias{save_xlsx}
-\title{Convert a Tatto table object to an Excel workbook}
+\title{Convert a Tatoo table object to an Excel workbook}
 \usage{
 as_workbook(dat, sheet = 1L, ...)
 
@@ -32,17 +32,17 @@ an openxlsx \link{openxlsx} Workbook object (invisibly for \code{save.xlsx})
 TRUE on success
 }
 \description{
-This function converts Tatoo_table obects directly to \link{openxlsx} Workbook
+This function converts Tatoo_table objects directly to \link{openxlsx} Workbook
 objects. For information about additional parameters please refer to the
 documentation of \code{write_worksheet()}, for which \code{as_workbook()}
-is just a wraper. Additional possible function arguments way vary depending
+is just a wrapper. Additional possible function arguments way vary depending
 on which Tatoo_table you want to export.
 
 Converting a \code{Tatoo_report} will result in a \code{Workbook} with
 several sheets. The sheet names will be generated from the names of
 \code{dat} (if \code{dat} has names).
 
-\code{save_xlsx} is a shortcut to save a Tatoo_table direclty to local .xlsx
+\code{save_xlsx} is a shortcut to save a Tatoo_table directly to local .xlsx
 file.
 }
 \examples{

@@ -2,7 +2,7 @@
 % Please edit documentation in R/Tagged_table.R
 \name{print.TT_meta}
 \alias{print.TT_meta}
-\title{Printing Tagged Table Metdata}
+\title{Printing Tagged Table Metadata}
 \usage{
 \method{print}{TT_meta}(x, ...)
 }
@@ -15,5 +15,5 @@
 \code{x} (invisibly)
 }
 \description{
-Printing Tagged Table Metdata
+Printing Tagged Table Metadata
 }

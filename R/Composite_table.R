@@ -8,7 +8,7 @@
 #' @param id_vars If id_vars is specified, the tables will be combined
 #'   using [merge()] on the columns specified in id_vars, otherwise
 #'   the tables will be combined with [cbind()].
-#' @param meta a [TT_meta] object. If speciefied, the resulting
+#' @param meta a [TT_meta] object. If specified, the resulting
 #'   Composite_table will be wrapped in a [Tagged_table].
 #'
 #' @return a Composite_table
@@ -16,7 +16,7 @@
 #' @md
 #' @rdname Composite_table
 #' @aliases comp_table composite_table Composite_table
-#' @family Tatto tables
+#' @family Tatoo tables
 #' @seealso Attribute setter: [multinames<-]
 #' @export
 #'
@@ -107,20 +107,22 @@ comp_table_list <- function(
 
     assert_that(all(id_vars_in_colnames))
 
-    merger <- function(x, y)  {suppressWarnings(
+    merger <- function(x, y) {
+      suppressWarnings(
       merge.data.frame(
         x,
         y,
         by = id_vars,
         all = TRUE,
         suffixes = c('', ''),
-        sort = FALSE)
-    )}
+        sort = FALSE))
+    }
     res <- Reduce(merger, tables)
   }
 
   # Generate table-title cell positions (for xlsx / latex export).
-  # if a "id_vars" was specified, this has to be considered when creating the indices
+  # if a "id_vars" was specified, this has to be considered when creating the
+  # indices
   table_multinames <- vector('integer', length(tables))
   for(i in seq_along(table_multinames)){
     table_multinames[[i]] <- ncol(tables[[i]]) - length(id_vars)
@@ -199,8 +201,12 @@ Composite_table <- function(
 
 #' Coerce to Composite Table
 #'
+#' Converts other R objects to Composite Tables by automatically creating
+#' multi-column names from the properties of the objects.
+#'
+#'
 #' @param dat any R object
-#' @inheritParams comp_table
+#' @param ... ignored
 #'
 #' @return
 #' `as_Composte_table()` returns a Composite_table
@@ -210,18 +216,35 @@ Composite_table <- function(
 #'
 #' @md
 #' @export
-as_Composite_table <- function(dat, id_vars, meta){
+as_Composite_table <- function(dat, ...){
   UseMethod('as_Composite_table')
 }
 
 
 
 
+#' `as_Composite_table.Mashed_table()` extracts the multi-column names from the
+#'   column names of the individual data.frames that make up a [Mashed_table],
+#'   and the column names from the names of the Mashed Table.
+#'
+#' @inheritParams comp_table
+#'
+#' @md
+#' @rdname as_Composite_table
 #' @export
+#' @examples
+#'
+#' mash_table(
+#'   head = head(cars),
+#'   tail = tail(cars),
+#'   mash_method = 'col'
+#' )
+#'
 as_Composite_table.Mashed_table <- function(
   dat,
   id_vars = attr(dat, 'id_vars'),
-  meta = attr(dat, 'meta')
+  meta = attr(dat, 'meta'),
+  ...
 ){
   assert_that(length(names(dat)) %identical% length(dat))
   assert_that(is.null(id_vars) || all(id_vars %in% names(dat[[1]])))
@@ -250,6 +273,81 @@ as_Composite_table.Mashed_table <- function(
 
 
 
+#' `as_Composite_table.data.frame()` extracts the multi-column names from the
+#'   column names of a `data.frame` based on a separator.
+#'
+#' @param sep a scalar character. Separator in the column names of `dat` that
+#'   separates the column name from the multi-column name.
+#' @param reverse logical. if `FALSE` the part after the last occurrence of `sep`
+#'   will be used as multiname, if `TRUE` the part before will be used.
+#'
+#' @export
+#' @rdname as_Composite_table
+#' @md
+#'
+#' @examples
+#'
+#' as_Composite_table(data.frame(
+#'   apple.fruit = 1,
+#'   kiwi.fruit = 2,
+#'   dog.animal = 1,
+#'   black.cat.animal = 2,
+#'   parrot.animal = 3
+#' ))
+#'
+as_Composite_table.data.frame <- function(
+  dat,
+  sep = ".",
+  reverse = FALSE,
+  ...
+){
+  as_Composite_table(
+    as.data.table(dat),
+    sep = sep,
+    reverse = reverse
+  )
+}
+
+
+
+
+#' @export
+as_Composite_table.data.table <- function(
+  dat,
+  sep = ".",
+  reverse = FALSE,
+  ...
+){
+  assert_that(rlang::is_scalar_character(sep))
+  assert_that(is.flag(reverse))
+
+  # Process inputs
+    res <- data.table::copy(dat)
+
+
+  # Logic
+    splt_pos <- stringi::stri_locate_last_fixed(names(dat), sep)[, 1]
+    cnames <- stringi::stri_sub(names(dat), to = splt_pos - 1)
+    mnames <- stringi::stri_sub(names(dat), from = splt_pos + 1)
+
+    if(reverse){
+      tmp <- cnames
+      cnames <- mnames
+      mnames <- tmp
+    }
+
+    sel <- is.na(cnames)
+    cnames[sel] <- names(dat)[sel]
+    mnames[is.na(mnames)] <- ''
+
+  res %>%
+    data.table::setnames(cnames) %>%
+    Composite_table(as_multinames(mnames))
+}
+
+
+
+
 #' @rdname as_Composite_table
 #' @export
 is_Composite_table <- function(dat, ...){
@@ -258,10 +356,8 @@ is_Composite_table <- function(dat, ...){
 
 
 
+
 # Methods -----------------------------------------------------------------
-
-
-
 
 #' Printing Composite Tables
 #'
@@ -279,7 +375,14 @@ print.Composite_table <- function(
   right = FALSE,
   ...
 ){
-  assert_that(has_attr(x, 'multinames'))
+  if(!has_attr(x, 'multinames')){
+    warning(
+      'x is not a valid composite table: no multinames attribute found.',
+      call. = FALSE
+    )
+    print(as.data.table(x, multinames = FALSE))
+    return(invisible())
+  }
 
   # Pad columns
     prep_col <- function(x, colname){
@@ -307,22 +410,30 @@ print.Composite_table <- function(
     names(res) <- names(multinames)
 
     for(i in seq_along(multinames)){
-      res[[i]] <- multinames[(i-1):i]
+      res[[i]] <- multinames[(i - 1):i]
 
       if(identical(i, 1L)){
         sel_cols <- 1:multinames[[i]]
       } else {
-        sel_cols <- (multinames[i-1]+1):multinames[i]
+        sel_cols <- (multinames[i - 1] + 1):multinames[i]
       }
 
-      res[[i]] <- do.call(paste, c(dd[sel_cols], sep="   "))
+      res[[i]] <- do.call(paste, c(dd[sel_cols], sep = "   "))
     }
 
     tmp <- list()
 
     for(i in seq_along(res)){
-      title  <- stringi::stri_pad_both(names(multinames)[[i]], max(nchar(res[[i]])), '.')
-      column <- stringi::stri_pad_both(res[[i]], nchar(title))
+      title  <- stringi::stri_pad_both(
+        names(multinames)[[i]], max(nchar(res[[i]])),
+        '.'
+      )
+
+      column <- stringi::stri_pad_both(
+        res[[i]],
+        nchar(title)
+      )
+
       sep    <- rep('  ', length(res[[i]]))
 
       tmp[[i]] <- list(column, sep)
@@ -339,6 +450,7 @@ print.Composite_table <- function(
 
 
 
+
 #' Convert a Composite Table to a plain data.table or data.frame
 #'
 #' As a \code{Composite_table} already is a \code{data.table} this function
@@ -349,7 +461,7 @@ print.Composite_table <- function(
 #' @param x a \code{Composite_table}
 #' @param multinames logical. Whether to prepend multinames before the column
 #'   names
-#' @param sep sepparator between multinames and individual column names
+#' @param sep separator between multinames and individual column names
 #' @param ... ignored
 #'
 #' @return a \code{data.table} or \code{data.frame}
@@ -362,34 +474,41 @@ as.data.table.Composite_table <- function(
   sep = '.',
   ...
 ){
-  assert_that(is.flag(multinames))
-  assert_that(purrr::is_scalar_character(sep))
-
-  if(!multinames){
-    data.table::setattr(x, 'class', c('data.table', 'data.frame'))
-    return(as.data.table(x))
-  } else {
-    res <- data.table::copy(x)
-    multinames <- attr(res, 'multinames')
-    name_idx <- 1
+  # Preconditions
+    assert_that(is.flag(multinames))
+    assert_that(rlang::is_scalar_character(sep))
 
 
-    # paste together colname
-    for(i in seq_along(res)){
-      names(res)[[i]] <- composite_name(
-        names(multinames[name_idx]),
-        names(res)[[i]],
-        sep = sep
-      )
+  # Process arguments
+    x <- data.table::copy(x)
 
-      if(i == multinames[name_idx]){
-        name_idx <- name_idx + 1
+
+  # Logic
+    if(!multinames || is.null(multinames(x))){
+      data.table::setattr(x, 'class', c('data.table', 'data.frame'))
+      return(as.data.table(x))
+    } else {
+      res <- x
+      multinames <- attr(res, 'multinames')
+      name_idx <- 1
+
+
+      # paste together colname
+      for(i in seq_along(res)){
+        names(res)[[i]] <- composite_name(
+          names(multinames[name_idx]),
+          names(res)[[i]],
+          sep = sep
+        )
+
+        if(i == multinames[name_idx]){
+          name_idx <- name_idx + 1
+        }
       }
-    }
 
 
+  # Cleanup
     data.table::setattr(res, 'class', c('data.table', 'data.frame'))
-
     return(as.data.table(res))
   }
 }
@@ -431,11 +550,11 @@ as.data.frame.Composite_table <- function(
 #'
 #' @param dat a Composite_table or data.frame
 #' @param value a named vector of ascending integers. The name is the
-#'   multi-column heading, the integer value is the last colum that this
+#'   multi-column heading, the integer value is the last column that this
 #'   heading applies to
 #'
 #' @md
-#' @seealso [Composite_table]
+#' @seealso [Composite_table], [as_multinames()]
 #' @rdname multinames
 #' @export
 #'
@@ -482,22 +601,88 @@ multinames <- function(dat){
 
 
 
-# Utils -------------------------------------------------------------------
 
-compose_tables <- function(...) {}
+# Utils -------------------------------------------------------------------
 
 composite_name <- function(x, y, sep){
   if(x == ''){
     return(y)
   } else {
-    paste(x, y, sep = sep)
+    paste(y, x, sep = sep)
   }
 }
 
 
 
 
+#' Create Composite Table multinames from a character vector
+#'
+#' @param x a character vector of equal length as the data.frame for which it
+#'   the multinames should be created.
+#'
+#' @return a named integer vector that can be used as multinames attribute
+#'   for a [Composite_table]
+#' @export
+#' @md
+#'
+#' @examples
+#'
+#' dat <- data.frame(
+#'   apple = 1,
+#'   banana = 2,
+#'   dog = 1,
+#'   cat = 2,
+#'   parrot = 3
+#' )
+#'
+#' multinames(dat) <- as_multinames(
+#'   c('fruit', 'fruit', 'animal', 'animal', 'animal')
+#' )
+#'
+#' multinames(dat)
+#'
+as_multinames <- function(x){
+  stats::setNames(cumsum(rle(x)[['lengths']]), rle(x)[['values']])
+}
 
 
 
 
+#' Flip names and multinames of a Composite Table
+#'
+#' The column names of the resulting Composite_table will be sorted lexically
+#'
+#' @param dat A [Composite_table]
+#' @param id_vars a character vector of column names of `dat`. The selected
+#'   columns will not be sorted lexically but kept to the left. If the columns
+#'   have a multiname associated with them, they must be supplied in the format
+#'   multiname.column.
+#'
+#' @return a Composite_table
+#' @md
+#' @export
+#'
+flip_names <- function(dat, id_vars){
+  UseMethod('flip_names')
+}
+
+
+
+#' @export
+flip_names.Composite_table <- function(
+  dat,
+  id_vars = NULL
+){
+  dd <- data.table::as.data.table(dat)
+  assert_that(all_are_distinct(names(dd)))
+  assert_that(is.null(id_vars) || all(id_vars %in% names(dd)))
+
+  sorted_names <- sort(names(dd)) %>%
+    vec_prioritise(id_vars)
+
+  data.table::setcolorder(dd, sorted_names)
+  res <- as_Composite_table(dd, reverse = TRUE)
+  meta(res) <- meta(dat)
+
+  return(res)
+}

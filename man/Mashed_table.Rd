@@ -47,7 +47,7 @@ that column names are identical except for a suffix, such as \code{length} and
 described for \code{(...)}}
 }
 \value{
-a \code{Mashed_table}: a \code{list} of \code{data.table}s with additonal
+a \code{Mashed_table}: a \code{list} of \code{data.table}s with additional
 \code{mash_method}, \code{insert_blank_row} and \code{sep_height} attributes, that
 influence how the table looks when it is printed or exported.
 }
@@ -122,7 +122,7 @@ mash_table(
 \seealso{
 Attribute setters: \link{mash_method<-}
 
-Other Tatto tables: \code{\link{comp_table}},
+Other Tatoo tables: \code{\link{comp_table}},
   \code{\link{stack_table}}, \code{\link{tag_table}},
   \code{\link{tatoo_table}}
 }

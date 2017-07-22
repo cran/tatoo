@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{sanitize_excel_sheet_names}
 \alias{sanitize_excel_sheet_names}
-\title{Sanitze excel sheet names}
+\title{Sanitize excel sheet names}
 \usage{
 sanitize_excel_sheet_names(x, replace = "_")
 }
@@ -16,7 +16,7 @@ sanitize_excel_sheet_names(x, replace = "_")
 a character vector of valid excel sheet names
 }
 \description{
-Convert a vactor to valid excel sheet names by:
+Convert a vector to valid excel sheet names by:
 \itemize{
 \item trimming names down to 31 characters,
 \item ensuring each element of the vector is unique,

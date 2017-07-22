@@ -32,10 +32,10 @@ write_worksheet(dat, wb, sheet, append = FALSE, start_row = 1L, ...)
 
 \item{sheet}{The worksheet to write to. Can be the worksheet index or name.}
 
-\item{append}{Logical. Whether or not to append to an exisiting worksheet or
+\item{append}{Logical. Whether or not to append to an existing worksheet or
 create a new one}
 
-\item{start_row}{A scalar specifiying the starting row to write to.}
+\item{start_row}{A scalar specifying the starting row to write to.}
 
 \item{...}{additional options that can be used override the styling
 attributes of the \link{Tatoo_table} you want to export.}
@@ -64,7 +64,7 @@ an \link{openxlsx} Workbook object
 \description{
 This function is similar to \code{\link[openxlsx:writeData]{openxlsx::writeData()}} from the
 \link{openxlsx} package, but rather than just writing data.frames,
-`write_worksheet`` supports specialised methods for the various
+`write_worksheet`` supports specialized methods for the various
 \link{Tatoo_table} subclasses.
 }
 \seealso{

@@ -22,8 +22,8 @@ is_class returns TRUE/FALSE, assert_class returns TRUE or fails with
         an error message.
 }
 \description{
-These functions are desinged to be used in combination with the assertthat
-pacakge
+These functions are designed to be used in combination with the assertthat
+package
 }
 \details{
 is_class returns TRUE/FALSE. It comes with a on_failure function and

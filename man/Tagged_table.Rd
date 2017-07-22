@@ -12,7 +12,7 @@ tag_table(dat, meta)
 \item{dat}{A \code{Tatto_table} object or anything that can be coerced to a
 \code{\link{data.table}} with \code{as.data.table()}}
 
-\item{meta}{a \link{tt_meta} object. Metdata can also be set and modified
+\item{meta}{a \link{tt_meta} object. Metadata can also be set and modified
 using setters (see \code{\link[=meta]{meta()}})}
 }
 \value{
@@ -44,7 +44,7 @@ table_metadata <- tt_meta(
   longtitle = "grades of the final examination"
 )
 
-# Metdata can be assign in a formal way or via set functions
+# Metadata can be assign in a formal way or via set functions
 dat <- tag_table(dat,  meta = table_metadata)
 meta(dat) <- table_metadata
 
@@ -71,7 +71,7 @@ Attribute setters: \link{meta<-}
 
 Tagged Table Metadata: \link{tt_meta}
 
-Other Tatto tables: \code{\link{comp_table}},
+Other Tatoo tables: \code{\link{comp_table}},
   \code{\link{mash_table}}, \code{\link{stack_table}},
   \code{\link{tatoo_table}}
 }
