@@ -5,9 +5,9 @@
 \alias{as.data.frame.Mashed_table}
 \title{Convert a Mashed Table to a data.table or data.frame}
 \usage{
-\method{as.data.table}{Mashed_table}(dat, mash_method = attr(dat,
-  "mash_method"), insert_blank_row = attr(dat, "insert_blank_row"),
-  id_vars = attr(dat, "id_vars"), suffixes = names(dat))
+\method{as.data.table}{Mashed_table}(x, mash_method = attr(x, "mash_method"),
+  insert_blank_row = attr(x, "insert_blank_row"), id_vars = attr(x,
+  "id_vars"), suffixes = names(x))
 
 \method{as.data.frame}{Mashed_table}(x, row.names = NULL, optional = FALSE,
   mash_method = attr(x, "mash_method"), insert_blank_row = attr(x,
@@ -15,10 +15,10 @@
   ...)
 }
 \arguments{
-\item{dat}{a \link{Mashed_table}}
+\item{x}{a \link{Mashed_table}}
 
-\item{mash_method}{either \code{"row"} or \code{"col"}. should the tables be mashed by
-row or by column?}
+\item{mash_method}{either \code{"row"} or \code{"col"}. Should the tables be mashed
+together with alternating rows or with alternating columns?}
 
 \item{insert_blank_row}{Only if mashing rows: logical. Whether to insert
 blank rows between mash-groups. \emph{Warning: this converts all columns to
@@ -30,8 +30,6 @@ to be mashed. If supplied, columns of both input tables are combined with
 
 \item{suffixes}{a character vector of length 2 specifying the suffixes to be
 used for making unique the names of columns.}
-
-\item{x}{any \R object.}
 
 \item{row.names}{\code{NULL} or a character vector giving the row
     names for the data frame.  Missing values are not allowed.}

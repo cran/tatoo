@@ -3,12 +3,9 @@
 \name{tatoo_table}
 \alias{tatoo_table}
 \alias{Tatoo_table}
-\alias{is_Tatoo_table}
 \title{Tatoo Table}
 \usage{
 tatoo_table(dat)
-
-is_Tatoo_table(dat)
 }
 \arguments{
 \item{dat}{an object of any of the classes listed in the description}
@@ -23,10 +20,10 @@ latex and html export is also planned.
 \details{
 Currently, the following subclasses exists:
 \itemize{
-\item \link{Tagged_table}
-\item \link{Composite_table}
-\item \link{Mashed_table}
-\item \link{Stacked_table}
+\item \code{\link{Tagged_table}}
+\item \code{\link{Composite_table}}
+\item \code{\link{Mashed_table}}
+\item \code{\link{Stacked_table}}
 }
 
 The \code{tatoo_table()} function is just a constructor used internally and you

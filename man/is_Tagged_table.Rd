@@ -2,13 +2,13 @@
 % Please edit documentation in R/Tagged_table.R
 \name{is_Tagged_table}
 \alias{is_Tagged_table}
-\title{Check if object is a Tagged_table}
+\title{Test If Object is a Tagged_table}
 \usage{
-is_Tagged_table(dat)
+is_Tagged_table(x)
 }
 \arguments{
-\item{dat}{any R object}
+\item{x}{Any \R object.}
 }
 \description{
-Check if object is a Tagged_table
+Test If Object is a Tagged_table
 }

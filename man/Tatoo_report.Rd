@@ -5,14 +5,11 @@
 \alias{Tatoo_report}
 \alias{tatoo_report}
 \alias{compile_report_list}
-\alias{is_Tatoo_report}
-\title{Compile tables into a report}
+\title{Compile Tables Into a Report}
 \usage{
 compile_report(...)
 
 compile_report_list(dat)
-
-is_Tatoo_report(dat, ...)
 }
 \arguments{
 \item{...}{for compile_table\code{: individual Tatoo_table} or
@@ -22,7 +19,7 @@ data.frame` objects}
 \code{Tatoo_table} or \code{data.frame} objects.}
 }
 \value{
-A \code{Tatoo_report}: A list whose elements are either \code{data.frame}s
+A \code{Tatoo_report}: A list whose elements are either \code{data.frames}
 or \code{\link{Tatoo_table}}s
 }
 \description{

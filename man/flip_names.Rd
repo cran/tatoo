@@ -7,16 +7,30 @@
 flip_names(dat, id_vars)
 }
 \arguments{
-\item{dat}{A \link{Composite_table}}
+\item{dat}{A \code{Composite_table}}
 
 \item{id_vars}{a character vector of column names of \code{dat}. The selected
 columns will not be sorted lexically but kept to the left. If the columns
 have a multiname associated with them, they must be supplied in the format
-multiname.column.}
+\code{column_name.multiname}.}
 }
 \value{
 a Composite_table
 }
 \description{
-The column names of the resulting Composite_table will be sorted lexically
+The column names of the resulting \code{Composite_table} will be sorted
+lexically
+}
+\examples{
+
+dat <- comp_table(
+  cars1 = head(cars),
+  cars2 = tail(cars),
+  data.frame(id = LETTERS[1:6])
+)
+
+flip_names(dat)
+flip_names(dat, id_vars = "id")
+flip_names(dat, id_vars = c("id", "speed.cars1"))
+
 }

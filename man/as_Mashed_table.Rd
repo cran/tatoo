@@ -5,21 +5,21 @@
 \alias{is_Mashed_table}
 \title{Coerce to Mashed Table}
 \usage{
-as_Mashed_table(dat, ...)
+as_Mashed_table(x, ...)
 
-is_Mashed_table(dat, ...)
+is_Mashed_table(x, ...)
 }
 \arguments{
-\item{dat}{any R object}
+\item{x}{Any \R object.}
 
-\item{...}{\code{mash_table()} only: \code{data.frame}s with the same row and column
+\item{...}{\code{mash_table()} only: \code{data.frames} with the same row and column
 count. Elements of \code{(...)} can be named, but the name must differ from
 the argument names of this function.}
 }
 \value{
 \code{as_Mashed_table()} returns a Mashed_table
 
-\code{is_Mashed_table()} returns \code{TRUE} if its argument is a Mashed_table
+\code{is_Mashed_table} returns \code{TRUE} if its argument is a \code{Mashed_table}
 and \code{FALSE} otherwise.
 }
 \description{

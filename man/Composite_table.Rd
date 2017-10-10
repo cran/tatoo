@@ -12,25 +12,26 @@ comp_table(..., id_vars = NULL, meta = NULL)
 comp_table_list(tables, id_vars = NULL, meta = NULL)
 }
 \arguments{
-\item{...}{\code{comp_table} only: individual data.frames. A name can be
-provided for each data.frame that will be used by \link{print} and
+\item{...}{\code{comp_table()} only: individual \code{data.frames}. A name can be
+provided for each \code{data.frame} that will be used by \code{\link[=print]{print()}} and
 \code{\link[=as_workbook]{as_workbook()}} to create multi-table headings.}
 
-\item{id_vars}{If id_vars is specified, the tables will be combined
-using \code{\link[=merge]{merge()}} on the columns specified in id_vars, otherwise
+\item{id_vars}{If \code{id_vars} is specified, the tables will be combined
+using \code{\link[=merge]{merge()}} on the columns specified in \code{id_vars}, otherwise
 the tables will be combined with \code{\link[=cbind]{cbind()}}.}
 
 \item{meta}{a \link{TT_meta} object. If specified, the resulting
-Composite_table will be wrapped in a \link{Tagged_table}.}
+\code{Composite_table} will be wrapped in a \link{Tagged_table}.}
 
 \item{tables}{\code{comp_table_list} only: A named list of data.frames with
 the same number of rows}
 }
 \value{
-a Composite_table
+A \code{Composite_table}.
 }
 \description{
-Compose Tables
+\code{comp_table()} is a drop in replacement for \code{\link[base:cbind]{base::cbind()}} that supports
+multi-column headings.#'
 }
 \examples{
 

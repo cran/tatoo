@@ -5,12 +5,12 @@
 \alias{multinames}
 \title{Set the multinames attribute of a Composite_table}
 \usage{
-multinames(dat) <- value
+multinames(x) <- value
 
-multinames(dat)
+multinames(x)
 }
 \arguments{
-\item{dat}{a Composite_table or data.frame}
+\item{x}{a \code{Composite_table} \code{or data.frame}}
 
 \item{value}{a named vector of ascending integers. The name is the
 multi-column heading, the integer value is the last column that this
@@ -27,7 +27,7 @@ df_mean <- data.frame(
   width = c(3.43, 2.77, 2.97)
 )
 
-multinames(df_mean) = c('species' = 1, measures = 3)
+multinames(df_mean) = c("species" = 1, measures = 3)
 
 # .species..     ...measures...
 # 1    Species     length   width

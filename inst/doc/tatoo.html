@@ -12,7 +12,7 @@
 
 <meta name="author" content="Stefan Fleck" />
 
-<meta name="date" content="2017-07-22" />
+<meta name="date" content="2017-10-10" />
 
 <title>tatoo package vignette</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">tatoo package vignette</h1>
 <h4 class="author"><em>Stefan Fleck</em></h4>
-<h4 class="date"><em>2017-07-22</em></h4>
+<h4 class="date"><em>2017-10-10</em></h4>
 
 
 <div id="TOC">
@@ -133,16 +133,14 @@ tagged_table &lt;-<span class="st"> </span><span class="kw">tag_table</span>(
 )
 
 <span class="kw">print</span>(tagged_table)</code></pre></div>
-<pre><code>## T01: Example Table - This is an example for tables created with the tatool package
+<pre><code>## T01: Example Table - This is an example for tables created with the tatool package 
 ## It features a lot of titles and very little data 
-## 
-##       Species length width
-## 1:     setosa   5.01  3.43
-## 2: versicolor   5.94  2.77
-## 3:  virginica   6.59  2.97
-## 
-## This table was created from the iris dataset
-## It consists of 3 different types of irises’
+##    Species length width 
+##     setosa   5.01  3.43 
+## versicolor   5.94  2.77 
+##  virginica   6.59  2.97 
+## This table was created from the iris dataset 
+## It consists of 3 different types of irises’ 
 ## (Setosa, Versicolour, and Virginica)</code></pre>
 <p>Metadata cann also be assigned an modified via set function.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">meta</span>(df1)  &lt;-<span class="st"> </span>ex_meta <span class="co"># df1 gets automatically converted to a Tagged_table</span>
@@ -155,11 +153,10 @@ tagged_table &lt;-<span class="st"> </span><span class="kw">tag_table</span>(
 
 <span class="kw">print</span>(df1)</code></pre></div>
 <pre><code>## A table with a title 
-## 
-##       Species length width
-## 1:     setosa   5.01  3.43
-## 2: versicolor   5.94  2.77
-## 3:  virginica   6.59  2.97</code></pre>
+##    Species length width 
+##     setosa   5.01  3.43 
+## versicolor   5.94  2.77 
+##  virginica   6.59  2.97</code></pre>
 </div>
 <div id="mashed-tables" class="section level1">
 <h1>Mashed tables</h1>
@@ -177,16 +174,15 @@ mashed_table &lt;-<span class="st"> </span><span class="kw">mash_table_list</spa
 <span class="st">  'Two or more tables mashed together so that rows or columns alternate'</span>
 
 <span class="kw">print</span>(mashed_table)</code></pre></div>
-<pre><code>## A mashed table
+<pre><code>## A mashed table 
 ## Two or more tables mashed together so that rows or columns alternate 
-## 
-##       Species length width 
-## 1:     setosa   5.01  3.43 
-## 2:     setosa   0.35  0.38 
-## 3: versicolor   5.94  2.77 
-## 4: versicolor   0.52  0.31 
-## 5:  virginica   6.59  2.97 
-## 6:  virginica   0.64  0.32</code></pre>
+##    Species length width 
+##     setosa   5.01  3.43 
+##     setosa   0.35  0.38 
+## versicolor   5.94  2.77 
+## versicolor   0.52  0.31 
+##  virginica   6.59  2.97 
+##  virginica   0.64  0.32</code></pre>
 <p>Additional formatting parameters can be saved as attributes to a mash table. Those attributes honored by the print and (more significantly) the <code>as_workbook()</code> methods.</p>
 <p>A row-mashed table</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mashed_table_row &lt;-<span class="st"> </span><span class="kw">mash_table</span>(
@@ -197,14 +193,13 @@ mashed_table &lt;-<span class="st"> </span><span class="kw">mash_table_list</spa
 )
 <span class="kw">print</span>(mashed_table_row)</code></pre></div>
 <pre><code>## A row-mashed table 
-## 
-##       Species length width 
-## 1:     setosa   5.01  3.43 
-## 2:     setosa   0.35  0.38 
-## 3: versicolor   5.94  2.77 
-## 4: versicolor   0.52  0.31 
-## 5:  virginica   6.59  2.97 
-## 6:  virginica   0.64  0.32</code></pre>
+##    Species length width 
+##     setosa   5.01  3.43 
+##     setosa   0.35  0.38 
+## versicolor   5.94  2.77 
+## versicolor   0.52  0.31 
+##  virginica   6.59  2.97 
+##  virginica   0.64  0.32</code></pre>
 <p>A col-mashed table</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mashed_table_col &lt;-<span class="st"> </span><span class="kw">mash_table</span>(
   <span class="dt">mean =</span> df1, <span class="dt">sd =</span> df2, 
@@ -215,40 +210,37 @@ mashed_table &lt;-<span class="st"> </span><span class="kw">mash_table_list</spa
 
 <span class="kw">print</span>(mashed_table_col)</code></pre></div>
 <pre><code>## A col-mashed table 
-## 
-##   ..........     ..length...     ...width...     
-## 1    Species     mean     sd     mean     sd     
-## 2     setosa     5.01   0.35     3.43   0.38     
-## 3 versicolor     5.94   0.52     2.77   0.31     
-## 4  virginica     6.59   0.64     2.97   0.32</code></pre>
+## ..........  ..length..  ..width... 
+##    Species  mean    sd  mean    sd 
+##     setosa  5.01  0.35  3.43  0.38 
+## versicolor  5.94  0.52  2.77  0.31 
+##  virginica  6.59  0.64  2.97  0.32</code></pre>
 <p>The display parameters are just saved as attributes, and can be modified conveniently via set functions. Named mashed tables will have two layers of colnames in print and xlsx output.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mash_method</span>(mashed_table) &lt;-<span class="st"> 'col'</span>
 <span class="kw">id_vars</span>(mashed_table) &lt;-<span class="st"> 'Species'</span>
 <span class="kw">names</span>(mashed_table) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">'mean'</span>, <span class="st">'sd'</span>)
 
 <span class="kw">print</span>(mashed_table)</code></pre></div>
-<pre><code>## A mashed table
+<pre><code>## A mashed table 
 ## Two or more tables mashed together so that rows or columns alternate 
-## 
-##   ..........     ..length...     ...width...     
-## 1    Species     mean     sd     mean     sd     
-## 2     setosa     5.01   0.35     3.43   0.38     
-## 3 versicolor     5.94   0.52     2.77   0.31     
-## 4  virginica     6.59   0.64     2.97   0.32</code></pre>
+## ..........  ..length..  ..width... 
+##    Species  mean    sd  mean    sd 
+##     setosa  5.01  0.35  3.43  0.38 
+## versicolor  5.94  0.52  2.77  0.31 
+##  virginica  6.59  0.64  2.97  0.32</code></pre>
 <p>You can also directly override the display parameters saved in the Mashed_table object for printing and xlsx export</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(mashed_table, <span class="dt">mash_method =</span> <span class="st">'row'</span>, <span class="dt">insert_blank_row =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>## A mashed table
+<pre><code>## A mashed table 
 ## Two or more tables mashed together so that rows or columns alternate 
-## 
-##       Species length width 
-## 1:     setosa   5.01  3.43 
-## 2:     setosa   0.35  0.38 
-## 
-## 3: versicolor   5.94  2.77 
-## 4: versicolor   0.52  0.31 
-## 
-## 5:  virginica   6.59  2.97 
-## 6:  virginica   0.64  0.32</code></pre>
+##    Species length width 
+##     setosa   5.01  3.43 
+##     setosa   0.35  0.38 
+##  
+## versicolor   5.94  2.77 
+## versicolor   0.52  0.31 
+##  
+##  virginica   6.59  2.97 
+##  virginica   0.64  0.32</code></pre>
 <p>All Tatoo table classes can be converted to openxlsx Workbooks via <code>as_workbook()</code>. Examples for finished <em>.xlsx</em> files are beyond the scope of this vignette.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as_workbook</span>(mashed_table)</code></pre></div>
 <pre><code>## A Workbook object.
@@ -320,21 +312,20 @@ composite_table &lt;-<span class="st"> </span><span class="kw">comp_table_list</
 <span class="st">  'Two or more tables put side by side, with multi-column-headings'</span>
 
 <span class="kw">print</span>(composite_table)</code></pre></div>
-<pre><code>## A composite table
+<pre><code>## A composite table 
 ## Two or more tables put side by side, with multi-column-headings 
-## 
-##   ...........mean............     ............sd.............    
-## 1    Species   length   width        Species   length   width    
-## 2     setosa     5.01    3.43         setosa     0.35    0.38    
-## 3 versicolor     5.94    2.77     versicolor     0.52    0.31    
-## 4  virginica     6.59    2.97      virginica     0.64    0.32</code></pre>
+## ..........mean...........  ...........sd............ 
+##    Species  length  width     Species  length  width 
+##     setosa    5.01   3.43      setosa    0.35   0.38 
+## versicolor    5.94   2.77  versicolor    0.52   0.31 
+##  virginica    6.59   2.97   virginica    0.64   0.32</code></pre>
 <p>When creating a Composite table, the <code>id_vars</code> argument can be used to combine the tables via merge, rather than via cbind.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">comp_table</span>(<span class="dt">mean =</span> df1, <span class="dt">sd =</span> df2, <span class="dt">id_vars =</span> <span class="st">'Species'</span>)</code></pre></div>
-<pre><code>##   ..........     .....mean.....     ......sd......    
-## 1    Species     length   width     length   width    
-## 2     setosa       5.01    3.43       0.35    0.38    
-## 3 versicolor       5.94    2.77       0.52    0.31    
-## 4  virginica       6.59    2.97       0.64    0.32</code></pre>
+<pre><code>## ..........  ....mean.....  .....sd......
+##    Species  length  width  length  width
+##     setosa    5.01   3.43    0.35   0.38
+## versicolor    5.94   2.77    0.52   0.31
+##  virginica    6.59   2.97    0.64   0.32</code></pre>
 </div>
 <div id="stacked-tables" class="section level1">
 <h1>Stacked tables</h1>
@@ -351,36 +342,32 @@ stacked_table &lt;-<span class="st"> </span><span class="kw">stack_table_list</s
 <span class="st">  'A list of multiple tables, mainly useful for xlsx export'</span>
 
 <span class="kw">print</span>(stacked_table)</code></pre></div>
-<pre><code>## A stacked table
+<pre><code>## A stacked table 
 ## A list of multiple tables, mainly useful for xlsx export 
-## 
-##  ````````````````````````````````````````````````````````````````````````` 
-##  `   A table with a title  
-##  `    
-##  `         Species length width 
-##  `   1:     setosa   5.01  3.43 
-##  `   2: versicolor   5.94  2.77 
-##  `   3:  virginica   6.59  2.97 
-##  `   _____________________________________________________________________ 
-##  `   A mashed table 
-##  `   Two or more tables mashed together so that rows or columns alternate  
-##  `    
-##  `     ..........     ..length...     ...width...      
-##  `   1    Species     mean     sd     mean     sd      
-##  `   2     setosa     5.01   0.35     3.43   0.38      
-##  `   3 versicolor     5.94   0.52     2.77   0.31      
-##  `   4  virginica     6.59   0.64     2.97   0.32      
-##  `   _____________________________________________________________________ 
-##  `   A composite table 
-##  `   Two or more tables put side by side, with multi-column-headings  
-##  `    
-##  `     ...........mean............     ............sd.............     
-##  `   1    Species   length   width        Species   length   width     
-##  `   2     setosa     5.01    3.43         setosa     0.35    0.38     
-##  `   3 versicolor     5.94    2.77     versicolor     0.52    0.31     
-##  `   4  virginica     6.59    2.97      virginica     0.64    0.32     
-##  `   
-##  `````````````````````````````````````````````````````````````````````````</code></pre>
+## ``````````````````````````````````````````````````````````````````````` 
+## `  A table with a title 
+## `     Species length width 
+## `      setosa   5.01  3.43 
+## `  versicolor   5.94  2.77 
+## `   virginica   6.59  2.97 
+## ____________________________________________________________________ 
+## `  A mashed table 
+## `  Two or more tables mashed together so that rows or columns alternate 
+## `  ..........  ..length..  ..width... 
+## `     Species  mean    sd  mean    sd 
+## `      setosa  5.01  0.35  3.43  0.38 
+## `  versicolor  5.94  0.52  2.77  0.31 
+## `   virginica  6.59  0.64  2.97  0.32 
+## ____________________________________________________________________ 
+## `  A composite table 
+## `  Two or more tables put side by side, with multi-column-headings 
+## `  ..........mean...........  ...........sd............ 
+## `     Species  length  width     Species  length  width 
+## `      setosa    5.01   3.43      setosa    0.35   0.38 
+## `  versicolor    5.94   2.77  versicolor    0.52   0.31 
+## `   virginica    6.59   2.97   virginica    0.64   0.32 
+## `   
+## ```````````````````````````````````````````````````````````````````````</code></pre>
 </div>
 <div id="tatoo-report" class="section level1">
 <h1>Tatoo Report</h1>
@@ -398,85 +385,75 @@ stacked_table &lt;-<span class="st"> </span><span class="kw">stack_table_list</s
 )
 
 <span class="kw">print</span>(tatoo_report)</code></pre></div>
-<pre><code>##   
-## tagged &lt;Tagged_table&gt; &lt;Tatoo_table&gt; 
+<pre><code>## tagged &lt;Tagged_table&gt; &lt;Tatoo_table&gt; 
 ## ::   T01: Example Table - This is an example for tables created with the tatool package 
-## ::   It features a lot of titles and very little data  
-## ::    
-## ::         Species length width 
-## ::   1:     setosa   5.01  3.43 
-## ::   2: versicolor   5.94  2.77 
-## ::   3:  virginica   6.59  2.97 
-## ::    
+## ::   It features a lot of titles and very little data 
+## ::      Species length width 
+## ::       setosa   5.01  3.43 
+## ::   versicolor   5.94  2.77 
+## ::    virginica   6.59  2.97 
 ## ::   This table was created from the iris dataset 
 ## ::   It consists of 3 different types of irises’ 
 ## ::   (Setosa, Versicolour, and Virginica) 
-## 
-## 
+##  
+##  
 ## mashed_row &lt;Tagged_table&gt; &lt;Mashed_table&gt; 
-## ::   A row-mashed table  
-## ::    
-## ::         Species length width  
-## ::   1:     setosa   5.01  3.43  
-## ::   2:     setosa   0.35  0.38  
-## ::   3: versicolor   5.94  2.77  
-## ::   4: versicolor   0.52  0.31  
-## ::   5:  virginica   6.59  2.97  
-## ::   6:  virginica   0.64  0.32  
-## 
-## 
+## ::   A row-mashed table 
+## ::      Species length width 
+## ::       setosa   5.01  3.43 
+## ::       setosa   0.35  0.38 
+## ::   versicolor   5.94  2.77 
+## ::   versicolor   0.52  0.31 
+## ::    virginica   6.59  2.97 
+## ::    virginica   0.64  0.32 
+##  
+##  
 ## mashed_col &lt;Tagged_table&gt; &lt;Mashed_table&gt; 
-## ::   A col-mashed table  
-## ::    
-## ::     ..........     ..length...     ...width...      
-## ::   1    Species     mean     sd     mean     sd      
-## ::   2     setosa     5.01   0.35     3.43   0.38      
-## ::   3 versicolor     5.94   0.52     2.77   0.31      
-## ::   4  virginica     6.59   0.64     2.97   0.32      
-## 
-## 
+## ::   A col-mashed table 
+## ::   ..........  ..length..  ..width... 
+## ::      Species  mean    sd  mean    sd 
+## ::       setosa  5.01  0.35  3.43  0.38 
+## ::   versicolor  5.94  0.52  2.77  0.31 
+## ::    virginica  6.59  0.64  2.97  0.32 
+##  
+##  
 ## composite &lt;Tagged_table&gt; &lt;Composite_table&gt; 
 ## ::   A composite table 
-## ::   Two or more tables put side by side, with multi-column-headings  
-## ::    
-## ::     ...........mean............     ............sd.............     
-## ::   1    Species   length   width        Species   length   width     
-## ::   2     setosa     5.01    3.43         setosa     0.35    0.38     
-## ::   3 versicolor     5.94    2.77     versicolor     0.52    0.31     
-## ::   4  virginica     6.59    2.97      virginica     0.64    0.32     
-## 
-## 
+## ::   Two or more tables put side by side, with multi-column-headings 
+## ::   ..........mean...........  ...........sd............ 
+## ::      Species  length  width     Species  length  width 
+## ::       setosa    5.01   3.43      setosa    0.35   0.38 
+## ::   versicolor    5.94   2.77  versicolor    0.52   0.31 
+## ::    virginica    6.59   2.97   virginica    0.64   0.32 
+##  
+##  
 ## stacked &lt;Tagged_table&gt; &lt;Stacked_table&gt; 
 ## ::   A stacked table 
-## ::   A list of multiple tables, mainly useful for xlsx export  
-## ::    
-## ::    `````````````````````````````````````````````````````````````````````````  
-## ::    `   A table with a title   
-## ::    `     
-## ::    `         Species length width  
-## ::    `   1:     setosa   5.01  3.43  
-## ::    `   2: versicolor   5.94  2.77  
-## ::    `   3:  virginica   6.59  2.97  
-## ::    `   _____________________________________________________________________  
-## ::    `   A mashed table  
-## ::    `   Two or more tables mashed together so that rows or columns alternate   
-## ::    `     
-## ::    `     ..........     ..length...     ...width...       
-## ::    `   1    Species     mean     sd     mean     sd       
-## ::    `   2     setosa     5.01   0.35     3.43   0.38       
-## ::    `   3 versicolor     5.94   0.52     2.77   0.31       
-## ::    `   4  virginica     6.59   0.64     2.97   0.32       
-## ::    `   _____________________________________________________________________  
-## ::    `   A composite table  
-## ::    `   Two or more tables put side by side, with multi-column-headings   
-## ::    `     
-## ::    `     ...........mean............     ............sd.............      
-## ::    `   1    Species   length   width        Species   length   width      
-## ::    `   2     setosa     5.01    3.43         setosa     0.35    0.38      
-## ::    `   3 versicolor     5.94    2.77     versicolor     0.52    0.31      
-## ::    `   4  virginica     6.59    2.97      virginica     0.64    0.32      
-## ::    `    
-## ::    `````````````````````````````````````````````````````````````````````````</code></pre>
+## ::   A list of multiple tables, mainly useful for xlsx export 
+## ::   ``````````````````````````````````````````````````````````````````````` 
+## ::   `  A table with a title 
+## ::   `     Species length width 
+## ::   `      setosa   5.01  3.43 
+## ::   `  versicolor   5.94  2.77 
+## ::   `   virginica   6.59  2.97 
+## ::   ____________________________________________________________________ 
+## ::   `  A mashed table 
+## ::   `  Two or more tables mashed together so that rows or columns alternate 
+## ::   `  ..........  ..length..  ..width... 
+## ::   `     Species  mean    sd  mean    sd 
+## ::   `      setosa  5.01  0.35  3.43  0.38 
+## ::   `  versicolor  5.94  0.52  2.77  0.31 
+## ::   `   virginica  6.59  0.64  2.97  0.32 
+## ::   ____________________________________________________________________ 
+## ::   `  A composite table 
+## ::   `  Two or more tables put side by side, with multi-column-headings 
+## ::   `  ..........mean...........  ...........sd............ 
+## ::   `     Species  length  width     Species  length  width 
+## ::   `      setosa    5.01   3.43      setosa    0.35   0.38 
+## ::   `  versicolor    5.94   2.77  versicolor    0.52   0.31 
+## ::   `   virginica    6.59   2.97   virginica    0.64   0.32 
+## ::   `   
+## ::   ```````````````````````````````````````````````````````````````````````</code></pre>
 </div>
 <div id="excel-export" class="section level1">
 <h1>Excel export</h1>

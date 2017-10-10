@@ -7,9 +7,9 @@
 \method{print}{Tagged_table}(x, ...)
 }
 \arguments{
-\item{x}{a \code{Tagged_table}}
+\item{x}{a \link{Tagged_table}}
 
-\item{...}{passed on to \code{\link{print}}}
+\item{...}{passed on to \code{\link[=print]{print()}}}
 }
 \value{
 \code{x} (invisibly)

@@ -7,42 +7,41 @@
 \alias{is_Composite_table}
 \title{Coerce to Composite Table}
 \usage{
-as_Composite_table(dat, ...)
+as_Composite_table(x, ...)
 
-\method{as_Composite_table}{Mashed_table}(dat, id_vars = attr(dat, "id_vars"),
-  meta = attr(dat, "meta"), ...)
+\method{as_Composite_table}{Mashed_table}(x, id_vars = attr(x, "id_vars"),
+  meta = attr(x, "meta"), ...)
 
-\method{as_Composite_table}{data.frame}(dat, sep = ".", reverse = FALSE,
-  ...)
+\method{as_Composite_table}{data.frame}(x, sep = ".", reverse = FALSE, ...)
 
-is_Composite_table(dat, ...)
+is_Composite_table(x, ...)
 }
 \arguments{
-\item{dat}{any R object}
+\item{x}{Any \R object.}
 
-\item{...}{ignored}
+\item{...}{Ignored}
 
-\item{id_vars}{If id_vars is specified, the tables will be combined
-using \code{\link[=merge]{merge()}} on the columns specified in id_vars, otherwise
+\item{id_vars}{If \code{id_vars} is specified, the tables will be combined
+using \code{\link[=merge]{merge()}} on the columns specified in \code{id_vars}, otherwise
 the tables will be combined with \code{\link[=cbind]{cbind()}}.}
 
 \item{meta}{a \link{TT_meta} object. If specified, the resulting
-Composite_table will be wrapped in a \link{Tagged_table}.}
+\code{Composite_table} will be wrapped in a \link{Tagged_table}.}
 
-\item{sep}{a scalar character. Separator in the column names of \code{dat} that
+\item{sep}{a scalar character. Separator in the column names of \code{x} that
 separates the column name from the multi-column name.}
 
 \item{reverse}{logical. if \code{FALSE} the part after the last occurrence of \code{sep}
 will be used as multiname, if \code{TRUE} the part before will be used.}
 }
 \value{
-\code{as_Composte_table()} returns a Composite_table
+\code{as_Composte_table()} returns a \code{Composite_table}
 
-\code{is_Composite_table()} returns \code{TRUE} if its argument is a Composite_table
+\code{is_Composite_table} returns \code{TRUE} if its argument is a \code{Composite_table}
 and \code{FALSE} otherwise.
 }
 \description{
-Converts other R objects to Composite Tables by automatically creating
+Converts other \R objects to \code{Composite_tables} by automatically creating
 multi-column names from the properties of the objects.
 
 \code{as_Composite_table.Mashed_table()} extracts the multi-column names from the

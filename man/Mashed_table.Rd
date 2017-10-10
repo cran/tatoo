@@ -16,12 +16,12 @@ mash_table_list(tables, mash_method = "row", id_vars = NULL,
   rem_ext = NULL)
 }
 \arguments{
-\item{...}{\code{mash_table()} only: \code{data.frame}s with the same row and column
+\item{...}{\code{mash_table()} only: \code{data.frames} with the same row and column
 count. Elements of \code{(...)} can be named, but the name must differ from
 the argument names of this function.}
 
-\item{mash_method}{either \code{"row"} or \code{"col"}. should the tables be mashed by
-row or by column?}
+\item{mash_method}{either \code{"row"} or \code{"col"}. Should the tables be mashed
+together with alternating rows or with alternating columns?}
 
 \item{id_vars}{Only if mashing columns: one ore more colnames of the tables
 to be mashed. If supplied, columns of both input tables are combined with
@@ -43,7 +43,7 @@ elements of \code{dat} must be identical. Sometimes you will have the situation
 that column names are identical except for a suffix, such as \code{length} and
 \code{lenght.sd}. The \code{rem_ext} option can be used to remove such suffixes.}
 
-\item{tables}{\code{mash_table_list()} only: a \code{list} of \code{data.frame}s as
+\item{tables}{\code{mash_table_list()} only: a \code{list} of \code{data.frames} as
 described for \code{(...)}}
 }
 \value{
@@ -52,14 +52,9 @@ a \code{Mashed_table}: a \code{list} of \code{data.table}s with additional
 influence how the table looks when it is printed or exported.
 }
 \description{
-Mash tables are designed to make it easy to put together multidimensional
-tables from two data.frames. An example where this might be useful is if you
-have a data.frame of numeric values, and a second data.frame of associated
-standard errors.
-}
-\details{
-Mash table provides a framework to mash those two data.frames together into
-one data.frame with alternating rows or columns.
+\code{mash_tables()} makes it easy to put together multidimensional
+tables from \code{data.frames} with the same number of rows and columns. You
+can mash tables together with either alternating rows or columns.
 }
 \examples{
 

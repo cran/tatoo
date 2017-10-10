@@ -7,9 +7,9 @@
 \method{print}{Stacked_table}(x, ...)
 }
 \arguments{
-\item{x}{A \code{Stacked_table}}
+\item{x}{A \code{\link{Stacked_table}}}
 
-\item{...}{passed on to \code{\link{print}}}
+\item{...}{passed on to \code{\link[=print]{print()}}}
 }
 \value{
 \code{x} (invisibly)

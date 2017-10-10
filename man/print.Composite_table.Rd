@@ -7,11 +7,10 @@
 \method{print}{Composite_table}(x, right = FALSE, ...)
 }
 \arguments{
-\item{x}{a \code{Tagged_table}}
+\item{x}{a \code{Composite_table}}
 
-\item{right}{\code{logical}, indicating whether or not strings should be
-right-aligned. The default is left-alignment (the opposite of the
-standard \code{print.data.frame} method.}
+\item{right}{Logical. Should strings be right aligned? The default is
+left-alignment (the opposite of the standard \code{\link[=print.data.frame]{print.data.frame()}}).}
 
 \item{...}{passed on to \code{\link{print}}}
 }

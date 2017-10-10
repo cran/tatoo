@@ -4,15 +4,15 @@
 \alias{spacing<-}
 \title{Set the spacing of a Stacked_table}
 \usage{
-spacing(dat) <- value
+spacing(x) <- value
 }
 \arguments{
-\item{dat}{a Stacked_table}
+\item{x}{a \code{Stacked_table}}
 
 \item{value}{a scalar integer}
 }
 \description{
-Set the of lineskips between the tables when exporting to xlsx
+Set the number of lineskips between the tables when exporting to xlsx.
 }
 \seealso{
 \link{Stacked_table}

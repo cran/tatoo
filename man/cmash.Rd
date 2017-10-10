@@ -41,7 +41,7 @@ or if \code{meta} is supplied;
 else a \code{data.frame}.
 }
 \description{
-\code{rmash} and \code{cmash} are convenience function to mash \code{data.frames} together
+\code{rmash()} and \code{cmash()} are convenience function to mash \code{data.frames} together
 with a single command. They behave similar to \code{\link[=cbind]{cbind()}} and
 \code{\link[=rbind]{rbind()}}, just that the result will have have alternating rows/columns.
 }

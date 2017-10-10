@@ -7,9 +7,9 @@
 \method{print}{TT_meta}(x, ...)
 }
 \arguments{
-\item{x}{A \code{TT_meta} object}
+\item{x}{A \code{\link{TT_meta}} object}
 
-\item{...}{ignored}
+\item{...}{Ignored}
 }
 \value{
 \code{x} (invisibly)

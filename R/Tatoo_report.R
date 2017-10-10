@@ -1,6 +1,6 @@
 # Ctors -------------------------------------------------------------------
 
-#' Compile tables into a report
+#' Compile Tables Into a Report
 #'
 #' Compiles tables into a `Tatoo_report`. A `Tatoo_report` is just
 #' a simple list object, but with special `print`, `as_workbook`,
@@ -12,10 +12,9 @@
 #' @param ... for compile_table`: individual Tatoo_table` or
 #'   data.frame` objects
 #'
-#' @return A `Tatoo_report`: A list whose elements are either `data.frame`s
-#'   or `\link{Tatoo_table}`s
+#' @return A `Tatoo_report`: A list whose elements are either `data.frames`
+#'   or [`Tatoo_table`]s
 #'
-#' @md
 #' @rdname Tatoo_report
 #' @aliases Tatoo_report tatoo_report compile_report
 #' @export
@@ -48,23 +47,29 @@ tatoo_report <- function(dat){
 
 # methods -----------------------------------------------------------------
 
-#' @rdname Tatoo_report
+#' Test if Object is a Tatoo_report
+#'
+#' @template any_r
+#' @templateVar class Tatoo_report
+#' @templateVar fun is_Tatoo_report()
+#' @template is_class
+#'
 #' @export
-is_Tatoo_report <- function(dat, ...){
-  inherits(dat, 'Tatoo_report')
+is_Tatoo_report <- function(x){
+  inherits(x, 'Tatoo_report')
 }
 
 
 #' @export
-is_valid.Tatoo_report <- function(dat){
+is_valid.Tatoo_report <- function(x){
   res <- list()
 
   is_valid_elclass <- function(x) {
     is_any_class(x, c('Tatoo_table', 'data.frame'))
   }
 
-  res$class <- is.list(dat)
-  res$elclasses <- lapply(dat, is_valid_elclass) %>%
+  res$class <- is.list(x)
+  res$elclasses <- lapply(x, is_valid_elclass) %>%
     unlist() %>%
     all()
 
@@ -83,27 +88,6 @@ is_valid.Tatoo_report <- function(dat){
 #'
 #' @export
 print.Tatoo_report <- function(x, ...){
-
-  make_table_heading <- function(y) {
-    if ('Tagged_table' %in% class(y)){
-      paste(class(y)[1:2], collapse = '> <')
-    } else {
-      class(y)[[1]]
-    }
-  }
-
-  classes <- lapply(x, make_table_heading)
-  classes <- sprintf('%s <%s> \n', names(x) %||% '', classes)
-
-
-  print_several_tables(
-    x,
-    indent = "::  ",
-    sep1 = 0,
-    sep2 = 2,
-    headings = classes,
-    ...
-  )
-
+  print_lines(as_lines(x))
   invisible(x)
 }

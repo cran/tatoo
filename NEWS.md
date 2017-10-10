@@ -1,3 +1,8 @@
+# tatoo 1.0.8
+
+* Support color themes for printing via colt and crayon
+
+
 # tatoo 1.0.7
 
 * Minor tweaks for compatibility with purrr 0.2.2

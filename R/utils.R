@@ -13,7 +13,6 @@
 #'
 #' @return a character vector of valid excel sheet names
 #' @export
-#' @md
 #'
 #' @examples
 #'
@@ -61,83 +60,28 @@ get_final_wb_row <- function(wb, sheet){
 
 
 
-#' Print several tables
-#'
-#' Internal function used by \code{print.Stacked_table} and
-#' \code{print.Tatoo_report}
-#'
-#' @param dat A \code{list} of objects that can be printed, usually \code{data.frame}s
-#'   or \code{Tatoo_table}s
-#' @param indent a scalar character specifying the indent symbols (e.g. "  ")
-#' @param sep1 \code{character} or \code{numeric}. Separator above the first and
-#'   below the last table.  If character a sep line is created using this
-#'   character (i.e. ------). If numeric, that many blank rows are inserted.
-#' @param sep2 \code{character} or \code{numeric}. Spacing between the tables.
-#'   Like \code{sep1}
-#' @param headings \code{character} vector of the same length as \code{dat},
-#'   specifying headings to be inserted above each table.
-#' @param ... passed on to \code{\link{print}}
-#'
-#' @return \code{dat} (invisibly)
-#'
-print_several_tables <- function(
-  dat,
-  indent,
-  sep1,
-  sep2,
-  headings = NULL,
-  ...
-){
-  assert_that(is.null(headings) || identical(length(headings), length(dat)))
-
-  tables_char <- dat %>%
-    lapply(function(x) utils::capture.output(print(x, ...)))
-
-  # Get width for print output
-  tables_width <- tables_char %>%
-    purrr::map(function(x) purrr::map_int(x, nchar)) %>%
-    unlist() %>%
-    max()
-  assert_that(rlang::is_scalar_integer(tables_width))
-
-
-  # Define sepperators
-  make_sepline <- function(x, offset = 0){
-    if(is.character(x)){
-      res <- paste(rep(x, tables_width + offset), collapse = '')
-    } else if (is.numeric(x)){
-      res <- paste0(paste0(rep('\n', x), collapse = ''))
-    } else {
-      stop('Sep must be either character or an integer number (for number of blank lines to insert)')
-    }
-    return(res)
-  }
-
-  sepline1 <- make_sepline(sep1, offset = nchar(indent))
-  sepline2 <- make_sepline(sep2)
-
-  cat('', sepline1, '\n')
-  for(i in seq_along(tables_char)){
-    if(!is.null(headings)){
-      cat(headings[[i]])
-    }
-    lapply(tables_char[[i]], function(x) cat(indent, x, '\n'))
-    if(i < length(tables_char)){
-      if(is.numeric(sep2)){
-        cat(sepline2)
-      } else {
-        cat(indent, sepline2, '\n')
-      }
-    }
-  }
-
-  if(sep1 != 0 && sep1 != '') {
-    cat(indent, '\n', sepline1, '\n')
-  }
-
-  invisible(dat)
-}
 
 get_dot_names <- function(...){
   sapply(as.list(substitute(list(...)))[-1L], deparse)
+}
+
+
+
+
+print_lines <- function(x){
+  for (i in x) cat(i, "\n")
+}
+
+
+
+
+make_sepline <- function(x, width, offset = 0){
+  if(is.character(x)){
+    res <- paste(rep(x, width + offset), collapse = '')
+  } else if (is.numeric(x)){
+    res <- rep('', x)
+  } else {
+    stop("Sep must be either character or an integer number")
+  }
+  return(res)
 }

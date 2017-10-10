@@ -4,15 +4,15 @@
 \alias{tag_table}
 \alias{Tagged_table}
 \alias{tagged_table}
-\title{Tag tables}
+\title{Tag Tables}
 \usage{
 tag_table(dat, meta)
 }
 \arguments{
 \item{dat}{A \code{Tatto_table} object or anything that can be coerced to a
-\code{\link{data.table}} with \code{as.data.table()}}
+\code{\link{data.table}}.}
 
-\item{meta}{a \link{tt_meta} object. Metadata can also be set and modified
+\item{meta}{a \code{\link{tt_meta}} object. Metadata can also be set and modified
 using setters (see \code{\link[=meta]{meta()}})}
 }
 \value{
@@ -22,14 +22,8 @@ attribute
 \description{
 Add metadata/captioning (like \code{table_id}, \code{title}, \code{footer}) to a
 \code{\link{Tatoo_table}} or \code{data.frame}. This metadata will be used by
-\code{print} methods and export functions such as \code{\link{as_workbook}}
-or \code{\link{save_xlsx}}.
-}
-\details{
-For convenience, functions to get and set the basic metadata elements
-such as \code{title} are also provided. Those can be used to either
-modify an existing \code{Tagged_table}, or convert an object that is not yet
-a \code{Tagged_table} to one.
+\code{\link[=print]{print()}} methods and export functions such as \code{\link[=as_workbook]{as_workbook()}}
+or \code{\link[=save_xlsx]{save_xlsx()}}.
 }
 \examples{
 
@@ -67,9 +61,9 @@ print(dat)
 
 }
 \seealso{
-Attribute setters: \link{meta<-}
+Attribute setters: \code{\link[=meta<-]{meta<-()}}
 
-Tagged Table Metadata: \link{tt_meta}
+Tagged Table Metadata: \code{\link[=tt_meta]{tt_meta()}}
 
 Other Tatoo tables: \code{\link{comp_table}},
   \code{\link{mash_table}}, \code{\link{stack_table}},

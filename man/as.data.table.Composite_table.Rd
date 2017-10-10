@@ -3,7 +3,7 @@
 \name{as.data.table.Composite_table}
 \alias{as.data.table.Composite_table}
 \alias{as.data.frame.Composite_table}
-\title{Convert a Composite Table to a plain data.table or data.frame}
+\title{Convert a Composite Table to a data.table or data.frame}
 \usage{
 \method{as.data.table}{Composite_table}(x, multinames = TRUE, sep = ".",
   ...)

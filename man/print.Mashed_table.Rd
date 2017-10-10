@@ -11,8 +11,8 @@
 \arguments{
 \item{x}{a Mashed_table}
 
-\item{mash_method}{either \code{"row"} or \code{"col"}. should the tables be mashed by
-row or by column?}
+\item{mash_method}{either \code{"row"} or \code{"col"}. Should the tables be mashed
+together with alternating rows or with alternating columns?}
 
 \item{insert_blank_row}{Only if mashing rows: logical. Whether to insert
 blank rows between mash-groups. \emph{Warning: this converts all columns to

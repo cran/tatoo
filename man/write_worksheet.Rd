@@ -6,45 +6,45 @@
 \alias{write_worksheet.Composite_table}
 \alias{write_worksheet.Mashed_table}
 \alias{write_worksheet.Stacked_table}
-\title{Write data to an openxlsx Worksheet}
+\title{Write Data to an openxlsx Worksheet}
 \usage{
-write_worksheet(dat, wb, sheet, append = FALSE, start_row = 1L, ...)
+write_worksheet(x, wb, sheet, append = FALSE, start_row = 1L, ...)
 
-\method{write_worksheet}{Tagged_table}(dat, wb,
-  sheet = sanitize_excel_sheet_names(attr(dat, "meta")$table_id),
+\method{write_worksheet}{Tagged_table}(x, wb,
+  sheet = sanitize_excel_sheet_names(attr(x, "meta")$table_id),
   append = FALSE, start_row = 1L, ...)
 
-\method{write_worksheet}{Composite_table}(dat, wb, sheet, append = FALSE,
+\method{write_worksheet}{Composite_table}(x, wb, sheet, append = FALSE,
   start_row = 1L, ...)
 
-\method{write_worksheet}{Mashed_table}(dat, wb, sheet, append = FALSE,
-  start_row = 1L, mash_method = attr(dat, "mash_method"),
-  id_vars = attr(dat, "id_vars"), insert_blank_row = attr(dat,
-  "insert_blank_row"), sep_height = attr(dat, "sep_height"), ...)
+\method{write_worksheet}{Mashed_table}(x, wb, sheet, append = FALSE,
+  start_row = 1L, mash_method = attr(x, "mash_method"), id_vars = attr(x,
+  "id_vars"), insert_blank_row = attr(x, "insert_blank_row"),
+  sep_height = attr(x, "sep_height"), ...)
 
-\method{write_worksheet}{Stacked_table}(dat, wb, sheet, append = FALSE,
-  start_row = 1L, spacing = attr(dat, "spacing"), ...)
+\method{write_worksheet}{Stacked_table}(x, wb, sheet, append = FALSE,
+  start_row = 1L, spacing = attr(x, "spacing"), ...)
 }
 \arguments{
-\item{dat}{A \link{Tatoo_table}.}
+\item{x}{A \code{Tatoo_table}.}
 
-\item{wb}{A \link{openxlsx} Workbook object}
+\item{wb}{An \link{openxlsx} \code{Workbook} object}
 
 \item{sheet}{The worksheet to write to. Can be the worksheet index or name.}
 
 \item{append}{Logical. Whether or not to append to an existing worksheet or
 create a new one}
 
-\item{start_row}{A scalar specifying the starting row to write to.}
+\item{start_row}{A scalar integer specifying the starting row to write to.}
 
-\item{...}{additional options that can be used override the styling
-attributes of the \link{Tatoo_table} you want to export.}
+\item{...}{Additional arguments passed on to methods for overriding the
+styling attributes of the \code{Tatoo_tables} you want to export.}
 
-\item{mash_method}{either \code{"row"} or \code{"col"}. should the tables be mashed by
-row or by column?}
+\item{mash_method}{either \code{"row"} or \code{"col"}. Should the tables be mashed
+together with alternating rows or with alternating columns?}
 
-\item{id_vars}{If id_vars is specified, the tables will be combined
-using \code{\link[=merge]{merge()}} on the columns specified in id_vars, otherwise
+\item{id_vars}{If \code{id_vars} is specified, the tables will be combined
+using \code{\link[=merge]{merge()}} on the columns specified in \code{id_vars}, otherwise
 the tables will be combined with \code{\link[=cbind]{cbind()}}.}
 
 \item{insert_blank_row}{Only if mashing rows: logical. Whether to insert
@@ -63,9 +63,9 @@ an \link{openxlsx} Workbook object
 }
 \description{
 This function is similar to \code{\link[openxlsx:writeData]{openxlsx::writeData()}} from the
-\link{openxlsx} package, but rather than just writing data.frames,
-`write_worksheet`` supports specialized methods for the various
-\link{Tatoo_table} subclasses.
+package, but rather than just writing \code{data.frames},
+\code{write_worksheet()} supports specialized methods for the various
+\code{\link{Tatoo_table}} subclasses.
 }
 \seealso{
 Other xlsx exporters: \code{\link{as_workbook}}

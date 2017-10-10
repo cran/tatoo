@@ -4,13 +4,13 @@
 \alias{assign_tt_meta}
 \title{Assign tt_meta elements}
 \usage{
-assign_tt_meta(dat, assignment)
+assign_tt_meta(x, assignment)
 }
 \arguments{
-\item{dat}{a [Tatoo_table] or data.frame}
+\item{x}{a \link{Tatoo_table} or data.frame}
 
 \item{assignment}{A named list of length one, for example
-`list(longtitle = value)`}
+\code{list(longtitle = value)}}
 }
 \description{
 Internal function used by the metadata set functions

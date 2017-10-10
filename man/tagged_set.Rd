@@ -10,28 +10,28 @@
 \alias{footer<-}
 \title{Set Tagged Table metadata}
 \usage{
-meta(dat) <- value
+meta(x) <- value
 
-meta(dat)
+meta(x)
 
-table_id(dat) <- value
+table_id(x) <- value
 
-title(dat) <- value
+title(x) <- value
 
-longtitle(dat) <- value
+longtitle(x) <- value
 
-subtitle(dat) <- value
+subtitle(x) <- value
 
-footer(dat) <- value
+footer(x) <- value
 }
 \arguments{
-\item{dat}{a \link{Tagged_table} or any object that can be converted to one}
+\item{x}{a \code{\link{Tagged_table}} or any \R object that can be converted to one}
 
 \item{value}{value to assign.}
 }
 \description{
-Convenience functions to modify Tagged_table metadata. If \code{dat} is not a
-Tagged_table already, it will be converted to one.
+Convenience functions to modify \code{Tagged_table} metadata. If \code{x} is not a
+\code{Tagged_table} already, it will be converted to one.
 }
 \seealso{
 \link{Tagged_table}, \link{tt_meta}

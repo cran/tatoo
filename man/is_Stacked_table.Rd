@@ -2,13 +2,17 @@
 % Please edit documentation in R/Stacked_table.R
 \name{is_Stacked_table}
 \alias{is_Stacked_table}
-\title{Check if object is a Stacked_table}
+\title{Test If Object is a Stacked_table}
 \usage{
-is_Stacked_table(dat)
+is_Stacked_table(x)
 }
 \arguments{
-\item{dat}{any R object}
+\item{x}{Any \R object.}
+}
+\value{
+\code{is_Stacked_table()} returns \code{TRUE} if its argument is a \code{Stacked_table}
+and \code{FALSE} otherwise.
 }
 \description{
-Check if object is a Stacked_table
+Test If Object is a Stacked_table
 }

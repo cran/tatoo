@@ -28,6 +28,14 @@ above to excel workbooks.
 }
 }
 
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://bitbucket.org/s_fleck/tatoo}
+  \item Report bugs at \url{https://bitbucket.org/s_fleck/tatoo/issues?status=new&status=open}
+}
+
+}
 \author{
 \strong{Maintainer}: Stefan Fleck \email{stefan.b.fleck@gmail.com}
 

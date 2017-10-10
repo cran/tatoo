@@ -5,15 +5,15 @@
 \alias{Stacked_table}
 \alias{stacked_table}
 \alias{stack_table_list}
-\title{Stack tables}
+\title{Stack Tables}
 \usage{
 stack_table(..., spacing = 2L, meta = NULL)
 
 stack_table_list(tables, spacing = 2L, meta = NULL)
 }
 \arguments{
-\item{...}{\code{stack_table()} only: Any number other \link{Tatoo_table}, or anything
-that can be coerced to a data.frame.}
+\item{...}{\code{stack_table()} only: Any number other \code{\link{Tatoo_table}} objects,
+or anything that can be coerced to a \code{data.frame}.}
 
 \item{spacing}{Number of lineskips between the tables when exporting to
 xlsx}
@@ -24,7 +24,7 @@ xlsx}
 just that a list can be supplied instead of individual arguments.}
 }
 \value{
-a Stacked_table: a list of Tatoo_tables with additional
+A Stacked_table: a list of \code{Tatoo_tables} with additional
 \code{spacing} attribute that controls the default spacing between the tables
 when it is exported.
 }

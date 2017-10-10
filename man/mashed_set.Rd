@@ -7,16 +7,16 @@
 \alias{id_vars<-}
 \title{Set mash attributes of a Mashed Table}
 \usage{
-mash_method(dat) <- value
+mash_method(x) <- value
 
-insert_blank_row(dat) <- value
+insert_blank_row(x) <- value
 
-sep_height(dat) <- value
+sep_height(x) <- value
 
-id_vars(dat) <- value
+id_vars(x) <- value
 }
 \arguments{
-\item{dat}{a Mashed_table}
+\item{x}{a \code{Mashed_table}}
 
 \item{value}{a value that is legal for the individual attribute, as
 described in \link{Mashed_table}}

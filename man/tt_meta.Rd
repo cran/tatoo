@@ -3,7 +3,7 @@
 \name{tt_meta}
 \alias{tt_meta}
 \alias{TT_meta}
-\title{Tagged Table metadata}
+\title{Tagged Table Metadata}
 \usage{
 tt_meta(table_id = NULL, title = NULL, longtitle = title,
   subtitle = NULL, footer = NULL)
