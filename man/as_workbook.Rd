@@ -5,6 +5,7 @@
 \alias{as_workbook.default}
 \alias{as_workbook.Tatoo_report}
 \alias{save_xlsx}
+\alias{view_xlsx}
 \title{Convert a Tatoo Table Object to an Excel Workbook}
 \usage{
 as_workbook(x, ...)
@@ -14,6 +15,8 @@ as_workbook(x, ...)
 \method{as_workbook}{Tatoo_report}(x, ...)
 
 save_xlsx(x, outfile, overwrite = FALSE, ...)
+
+view_xlsx(x, ...)
 }
 \arguments{
 \item{x}{A \code{Tatoo_table} or \code{Tatoo_report}}
@@ -27,12 +30,14 @@ save_xlsx(x, outfile, overwrite = FALSE, ...)
 \item{overwrite}{If \code{TRUE}, overwrite any existing file.}
 }
 \value{
-an openxlsx openxlsx \code{Workbook} object (invisibly for \code{save_xlsx()})
+\code{as_workbook()} returns an openxlsx \code{Workbook} object.
 
-\code{TRUE} on success
+\code{save_xlsx()} returns the path to the saved \file{.xlsx} (invisibly).
+
+\code{view_xlsx()} opens an external program and returns \code{NULL} (invisibly).
 }
 \description{
-This function converts \code{\link{Tatoo_table}} or \code{\link{Tatoo_report}} objects directly
+\code{as_workbook()} converts \code{\link{Tatoo_table}} or \code{\link{Tatoo_report}} objects directly
 to \link{openxlsx} \code{Workbook} objects. For information about additional parameters
 please refer to the documentation of \code{\link[=write_worksheet]{write_worksheet()}}, for which
 \code{as_workbook()} is just a wrapper. Additional possible function arguments way
@@ -42,8 +47,12 @@ Converting a \code{\link{Tatoo_report}} will result in an openxlsx Workbook with
 several sheets. The sheet names will be generated from the names of
 \code{x} if \code{x} has names.
 
-\code{save_xlsx()} is a shortcut to save a \code{Tatoo_table} directly to local xlsx
-file.
+\code{save_xlsx()} is a wrapper for saving a \code{Tatoo_table} directly
+to an \file{xlsx} file.
+
+\code{view_xlsx()} is another wrapper for viewing a \code{Tatoo_table}'s
+\file{xlsx} representation in your favourite spreadsheet program (powered by
+\code{\link[openxlsx:openXL]{openxlsx::openXL()}}).
 }
 \examples{
 \dontrun{

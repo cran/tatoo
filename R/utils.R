@@ -4,11 +4,11 @@
 #'
 #' Convert a vector to valid excel sheet names by:
 #' * trimming names down to 31 characters,
-#' * ensuring each element of the vector is unique,
-#' * and removing the illegal characters \code{ \ / * [ ] : ?}.
+#' * ensuring each element of the vector is unique, and
+#' * removing the illegal characters `\ / * [ ] : ?`
 #'
 #' @param x a vector (or anything that can be coerced to one via
-#'   \code{as.character()}).
+#'   [as.character()]).
 #' @param replace a scalar character to replace illegal characters with
 #'
 #' @return a character vector of valid excel sheet names
@@ -36,7 +36,7 @@ sanitize_excel_sheet_names <- function(x, replace = '_'){
 
     if(length(res[res == el]) > 1L){
       res[res == el] <- paste0(
-        strtrim(res[res == el], 31 - max(nchar(suffix))),
+        strtrim(res[res == el], 31 - max(crayon::col_nchar(suffix))),
         suffix)
     }
   }
@@ -44,6 +44,34 @@ sanitize_excel_sheet_names <- function(x, replace = '_'){
   assert_that(is.character(res))
   assert_that(all_are_distinct(res, silent = TRUE))
   return(res)
+}
+
+
+
+
+#' Open a file
+#'
+#' Open a file with the default associated program. Might behave differently
+#' depending on the operating system.
+#'
+#' @param x `character` scalar. Path to the file to open.
+#'
+#' @return `NULL` (invisibly)
+#' @export
+#'
+open_file <- function(x){
+  os <- Sys.info()[["sysname"]]
+
+  if (os == "Windows") {
+    cmd <- sprintf('start "" "%s"', x)
+    shell(cmd)
+  } else if (os == "Linux") {
+    system2("xdg-open", x)
+  } else {
+    system2("open", x)  # MacOS?
+  }
+
+  invisible()
 }
 
 
@@ -85,3 +113,17 @@ make_sepline <- function(x, width, offset = 0){
   }
   return(res)
 }
+
+
+
+
+require_knitr <- function(){
+  assert_that(requireNamespace("knitr", quietly = TRUE))
+}
+
+
+
+require_openxlsx <- function(){
+  assert_that(requireNamespace("openxlsx", quietly = TRUE))
+}
+

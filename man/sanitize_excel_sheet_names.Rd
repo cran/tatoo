@@ -8,7 +8,7 @@ sanitize_excel_sheet_names(x, replace = "_")
 }
 \arguments{
 \item{x}{a vector (or anything that can be coerced to one via
-\code{as.character()}).}
+\code{\link[=as.character]{as.character()}}).}
 
 \item{replace}{a scalar character to replace illegal characters with}
 }
@@ -19,9 +19,11 @@ a character vector of valid excel sheet names
 Convert a vector to valid excel sheet names by:
 \itemize{
 \item trimming names down to 31 characters,
-\item ensuring each element of the vector is unique,
-\item and removing the illegal characters \code{ \ / * [ ] : ?}.
+\item ensuring each element of the vector is unique, and
+\item removing the illegal characters \code{\ / * [ ] : ?}
 }
+
+[ ]: R:%20
 }
 \examples{
 

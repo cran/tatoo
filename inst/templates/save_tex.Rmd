@@ -1,0 +1,13 @@
+\documentclass{article}
+\pagestyle{empty}
+\usepackage{geometry}
+\geometry{{PAPERSIZE}, {ORIENTATION}, margin=0.5in}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{threeparttablex}
+
+\begin{document}
+
+{TABLE}
+
+\end{document}
