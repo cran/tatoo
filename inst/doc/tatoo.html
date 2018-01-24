@@ -12,7 +12,7 @@
 
 <meta name="author" content="Stefan Fleck" />
 
-<meta name="date" content="2018-01-16" />
+<meta name="date" content="2018-01-23" />
 
 <title>tatoo package vignette</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">tatoo package vignette</h1>
 <h4 class="author"><em>Stefan Fleck</em></h4>
-<h4 class="date"><em>2018-01-16</em></h4>
+<h4 class="date"><em>2018-01-23</em></h4>
 
 
 <div id="TOC">
@@ -460,7 +460,7 @@ stacked_table &lt;-<span class="st"> </span><span class="kw">stack_table_list</s
 <p>For further processing with <em>openxlsx</em>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wb &lt;-<span class="st"> </span><span class="kw">as_workbook</span>(tatoo_report)  </code></pre></div>
 <p>For direct xlsx export</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">save_xlsx</span>(tatoo_report, <span class="st">'report_example.xlsx'</span>, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># save_xlsx(tatoo_report, paste(tempfile(), &quot;.xlsx&quot;), overwrite = TRUE)</span></code></pre></div>
 </div>
 
 

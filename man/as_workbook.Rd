@@ -71,7 +71,7 @@ footer(dat) <-  'An example based on the iris dataset'
 # Convert to Workbook or save als xlsx
 
 wb <- as_workbook(dat)
-save_xlsx(dat, 'iris.xlsx', overwrite = TRUE)
+save_xlsx(dat, tempfile(fileext = ".xlsx"), overwrite = TRUE)
 }
 
 }

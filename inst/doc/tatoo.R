@@ -149,6 +149,6 @@ print(tatoo_report)
 ## ------------------------------------------------------------------------
 wb <- as_workbook(tatoo_report)  
 
-## ------------------------------------------------------------------------
-save_xlsx(tatoo_report, 'report_example.xlsx', overwrite = TRUE)
+## ---- eval = FALSE-------------------------------------------------------
+#  # save_xlsx(tatoo_report, paste(tempfile(), ".xlsx"), overwrite = TRUE)
 

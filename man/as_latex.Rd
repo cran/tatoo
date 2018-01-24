@@ -8,10 +8,9 @@
 \usage{
 as_latex(x, ..., kable_options = default_kable_options())
 
-save_pdf(x, outfile = paste0(paste(substitute(x), collapse = "_"), ".pdf"),
-  ..., overwrite = FALSE, papersize = "a4paper", orientation = "portrait",
-  keep_source = FALSE, template = system.file("templates", "save_tex.Rmd",
-  package = "tatoo"))
+save_pdf(x, outfile, ..., overwrite = FALSE, papersize = "a4paper",
+  orientation = "portrait", keep_source = FALSE,
+  template = system.file("templates", "save_tex.Rmd", package = "tatoo"))
 
 view_pdf(x, ...)
 }
@@ -74,9 +73,12 @@ system:\preformatted{\usepackage{booktabs}
 }
 
 \examples{
+  as_latex(iris)
 
-as_latex(iris)
-view_pdf(iris)
+\dontrun{
+  view_pdf(iris)  # Not supported on all systems
+}
+
 
 }
 \seealso{

@@ -31,9 +31,12 @@
 #' @family as_latex methods
 #'
 #' @examples
+#'   as_latex(iris)
 #'
-#' as_latex(iris)
-#' view_pdf(iris)
+#' \dontrun{
+#'   view_pdf(iris)  # Not supported on all systems
+#' }
+#'
 #'
 as_latex <- function(
   x,
@@ -276,7 +279,7 @@ as_latex.data.frame <- function(
 #'
 save_pdf <- function(
   x,
-  outfile = paste0(paste(substitute(x), collapse = "_"), ".pdf"),
+  outfile,
   ...,
   overwrite = FALSE,
   papersize = "a4paper",
@@ -293,7 +296,7 @@ save_pdf <- function(
 #' @export
 save_pdf.default <- function(
   x,
-  outfile = paste0(make.names(paste(substitute(x), collapse = "_")), ".pdf"),
+  outfile,
   ...,
   overwrite = FALSE,
   papersize = "a4paper",
@@ -308,7 +311,6 @@ save_pdf.default <- function(
     if (overwrite) unlink(outfile)
     else stop(sprintf("'%s' already exists.", outfile))
   }
-
 
   tex <- as_latex(x, ..., kable_options = kable_options)
   tex <- gsub("{TABLE}", tex, temp, fixed = TRUE)
@@ -344,7 +346,7 @@ save_pdf.default <- function(
 #' @rdname as_latex
 #' @export
 view_pdf <- function(x, ...){
-  tf <- tempfile()
+  tf <- paste0(tempfile(), ".pdf")
   save_pdf(x, outfile = tf, overwrite = TRUE, ...)
   open_file(tf)
   invisible()
