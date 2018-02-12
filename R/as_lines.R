@@ -1,12 +1,12 @@
 #* @testfile manual_tests/test_as_lines
 
-#' Create a line-by-line text representation of an R Object
+#' Create a line-by-line text representation of an \R object
 #'
-#' Creates a line-by-line representation of an \R Obeject (usually a
+#' Creates a line-by-line representation of an \R object (usually a
 #' `Tatoo_table`). This is the function powers all `Tatoo_table` print methods.
 #'
 #' @template any_r
-#' @param color Use colors (via [colt])
+#' @param color Use colors (via \pkg{colt})
 #' @param ... passed on methods.
 #'
 #' @return A character vector (one element per line).
@@ -32,7 +32,9 @@ as_lines.data.frame <- function(
   )
 
   res[is.na(res)] <- "NA"
-  res <- apply(res, 2, function(x) stringi::stri_pad_left(x, max(crayon::col_nchar(x), na.rm = TRUE)))
+  res <- apply(res, 2, function(x) {
+    stringi::stri_pad_left(x, max(crayon::col_nchar(x), na.rm = TRUE))
+  })
   res <- apply(res, 1, paste, collapse = " ")
 
   if(color){
@@ -170,7 +172,7 @@ as_lines.Composite_table <- function(
   color = TRUE,
   ...
 ){
-  mutlicol_spacing = "  "
+  mutlicol_spacing <- "  "
 
   if(!has_attr(x, 'multinames')){
     warning(
@@ -244,7 +246,7 @@ as_lines.Composite_table <- function(
     res2[2, ] <- style_colname(res2[2, ])
   }
 
-  apply(res2, 1 , paste, collapse = mutlicol_spacing)
+  apply(res2, 1, paste, collapse = mutlicol_spacing)
 }
 
 
@@ -360,7 +362,9 @@ as_lines_several_tables <- function(
   # Process arguments
   tables_char  <- purrr::map(dat, as_lines, color = color)
   tables_width <- max(crayon::col_nchar(unlist(tables_char)))
-  sepline1 <- make_sepline(sep1, width = tables_width, offset = crayon::col_nchar(indent))
+  sepline1 <- make_sepline(
+    sep1, width = tables_width, offset = crayon::col_nchar(indent)
+  )
   sepline2 <- make_sepline(sep2, width = tables_width)
 
   if(color){

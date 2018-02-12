@@ -23,7 +23,7 @@ ex_meta <- tt_meta(
   longtitle = 'This is an example for tables created with the tatool package', 
   subtitle  = 'It features a lot of titles and very little data', 
   footer    = c('This table was created from the iris dataset', 
-                'It consists of 3 different types of irises’',
+                'It consists of 3 different types of irisesâ€™',
                  '(Setosa, Versicolour, and Virginica)') 
 )
 

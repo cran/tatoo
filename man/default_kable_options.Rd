@@ -11,7 +11,7 @@ default_kable_options(...)
 }
 \description{
 \code{default_kable_options()} returns a list of the default options that are
-required for \code{\link[=as_latex]{as_latex()}} to work correclty. Those defaults should not be
+required for \code{\link[=as_latex]{as_latex()}} to work correctly. Those defaults should not be
 modified, but you can pass additional \code{\link[knitr:kable]{knitr::kable()}} options to
 \code{as_latex()} to modify the output a bit.
 }

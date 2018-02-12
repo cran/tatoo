@@ -1,5 +1,3 @@
-#* @testfile test_save_xlsx
-
 # as_workbook -------------------------------------------------------------
 
 #' Convert a Tatoo Table Object to an Excel Workbook
@@ -80,7 +78,10 @@ as_workbook.default <- function(
 #'
 #' @rdname as_workbook
 #' @export
-as_workbook.Tatoo_report <- function(x, ...){
+as_workbook.Tatoo_report <- function(
+  x,
+  ...
+){
   wb <- openxlsx::createWorkbook()
 
   for(i in seq_along(x)){
@@ -125,16 +126,25 @@ as_workbook.Workbook <- function(x, ...){
 #'
 #' @param x A `Tatoo_table`.
 #' @param wb An [openxlsx] `Workbook` object
-#' @param append Logical. Whether or not to append to an existing worksheet or
+#' @param append `logical` Whether or not to append to an existing worksheet or
 #'   create a new one
 #' @param start_row A scalar integer specifying the starting row to write to.
 #' @param ... Additional arguments passed on to methods for overriding the
 #'   styling attributes of the `Tatoo_tables` you want to export.
+#' @param named_regions `logical`. If `TRUE` (default) named regions are created
+#'   in the target excel file to identify different parts of the tables
+#'   (header, body, column names, etc...). These named regions can, for example,
+#'   be used for applying formats. Creating named regions can be switched of
+#'   as this might impact performance of the excel conversion and writing of
+#'   excel files for workbooks with large numbers of tables.
+#' @param named_regions_prefix `character` scalar. Prefix to write in front
+#'   of all named regions created by `write_worksheet`
 #'
 #' @inheritParams comp_table
 #' @inheritParams mash_table
 #' @inheritParams stack_table
 #' @inheritParams as_workbook
+
 #'
 #' @return an [openxlsx] Workbook object
 #' @family xlsx exporters
@@ -146,7 +156,9 @@ write_worksheet <- function(
   sheet,
   append = FALSE,
   start_row = 1L,
-  ...
+  ...,
+  named_regions = TRUE,
+  named_regions_prefix = NA_character_
 ){
   wb %assert_class% 'Workbook'
   assert_that(is.scalar(sheet))
@@ -167,17 +179,51 @@ write_worksheet.default <- function(
   sheet,
   append = FALSE,
   start_row = 1L,
-  ...
+  ...,
+  named_regions = TRUE,
+  named_regions_prefix = NA_character_
 ){
   if(!append){
     openxlsx::addWorksheet(wb, sheet)
   }
 
-  openxlsx::writeData(
-    wb = wb,
-    sheet = sheet,
-    x = x,
-    startRow = start_row)
+  dots <- list(...)
+  wd_args <- intersect(names(dots), names(formals(openxlsx::writeData)))
+
+  do.call(
+    openxlsx::writeData,
+    args = c(
+      list(wb = wb, sheet = sheet, x = x, startRow = start_row),
+      dots[wd_args]
+    )
+  )
+
+
+  if (named_regions){
+    openxlsx::createNamedRegion(
+      wb,
+      sheet = sheet,
+      rows = seq(start_row, start_row + nrow(x)),
+      cols = seq_len(ncol(x)),
+      name = make_region_name(table_id(x), named_regions_prefix, "table")
+    )
+
+    openxlsx::createNamedRegion(
+      wb,
+      sheet = sheet,
+      rows = start_row,
+      cols = seq_len(ncol(x)),
+      name = make_region_name(table_id(x), named_regions_prefix, "table", "colnames")
+    )
+
+    openxlsx::createNamedRegion(
+      wb,
+      sheet = sheet,
+      rows = seq(start_row + 1, start_row + nrow(x)),
+      cols = seq_len(ncol(x)),
+      name = make_region_name(table_id(x), named_regions_prefix, "table", "body")
+    )
+  }
 
   wb %assert_class% 'Workbook'
   return(wb)
@@ -194,7 +240,9 @@ write_worksheet.Tagged_table <- function(
   sheet = sanitize_excel_sheet_names(attr(x, 'meta')$table_id),
   append = FALSE,
   start_row = 1L,
-  ...
+  ...,
+  named_regions = TRUE,
+  named_regions_prefix = NA_character_
 ){
   wb %assert_class% 'Workbook'
   assert_that(has_attr(x, 'meta'))
@@ -243,6 +291,17 @@ write_worksheet.Tagged_table <- function(
   )
 
 
+  if(named_regions && length(header) > 0){
+    openxlsx::createNamedRegion(
+      wb,
+      sheet = sheet,
+      cols  = 1L,
+      rows  = seq(crow, crow + length(header) - 1L),
+      name  = make_region_name(named_regions_prefix, table_id(x), "header")
+    )
+  }
+
+
   # write data
   crow <- crow + length(header) + 1
   ## hacky, but NextMethod did not do what i wanted when ... were passed to
@@ -255,7 +314,9 @@ write_worksheet.Tagged_table <- function(
     sheet = sheet,
     append = TRUE,
     start_row = crow,
-    ...
+    ...,
+    named_regions = named_regions,
+    named_regions_prefix = named_regions_prefix
   )
 
 
@@ -270,8 +331,17 @@ write_worksheet.Tagged_table <- function(
       startRow = crow,
       meta$footer
     )
-  }
 
+    if (named_regions){
+      openxlsx::createNamedRegion(
+        wb,
+        sheet = sheet,
+        cols  = 1L,
+        rows  = seq(crow, crow + length(meta$footer) - 1L),
+        name  = make_region_name(table_id(x), "footer")
+      )
+    }
+  }
 
   return(wb)
 }
@@ -287,7 +357,9 @@ write_worksheet.Composite_table <- function(
   sheet,
   append = FALSE,
   start_row = 1L,
-  ...
+  ...,
+  named_regions = TRUE,
+  named_regions_prefix = NA_character_
 ){
   # Pre-condtions
   assert_that(has_attr(x, 'multinames'))
@@ -314,6 +386,7 @@ write_worksheet.Composite_table <- function(
     }
   }
 
+
   # Write "subtable" headings
   openxlsx::writeData(
     wb,
@@ -322,6 +395,16 @@ write_worksheet.Composite_table <- function(
     colNames = FALSE,
     startRow = crow
   )
+
+  if (named_regions){
+    openxlsx::createNamedRegion(
+      wb,
+      sheet = sheet,
+      rows = crow,
+      cols = seq_along(x),
+      name = make_region_name(named_regions_prefix, table_id(x), "composite", "table", "multinames")
+    )
+  }
 
   crow <- crow + 1
 
@@ -337,14 +420,15 @@ write_worksheet.Composite_table <- function(
     )
   }
 
-
-  # Write data
-  openxlsx::writeData(
+  write_worksheet(
+    as.data.frame(x, multinames = FALSE),
     wb,
     sheet = sheet,
-    startRow = crow,
-    as.data.frame(x, multinames = FALSE),
-    colNames = TRUE
+    start_row = crow,
+    append = TRUE,
+    named_regions = named_regions,
+    named_regions_prefix = c(named_regions_prefix, "composite"),
+    ...
   )
 
   return(wb)
@@ -365,7 +449,9 @@ write_worksheet.Mashed_table <- function(
   id_vars  = attr(x, 'id_vars'),
   insert_blank_row = attr(x, 'insert_blank_row'),
   sep_height = attr(x, 'sep_height'),
-  ...
+  ...,
+  named_regions = TRUE,
+  named_regions_prefix = NA_character_
 ){
   # Preconditions
     assert_that(mash_method %identical% 'col' || mash_method %identical% 'row')
@@ -397,20 +483,25 @@ write_worksheet.Mashed_table <- function(
 
     assert_that(!is_Mashed_table(res))  # prevent infinite loop
 
+
   # Write data
     wb <- write_worksheet(
       res,
       wb = wb,
       sheet = sheet,
       append = TRUE,
-      start_row = start_row
+      start_row = start_row,
+      named_regions = named_regions,
+      named_regions_prefix = c(named_regions_prefix, table_id(x), mash_method, "mashed"),
+      ...
     )
+
 
   # Modify row heights
     row_off          <- start_row - 1
     sep_height_start <- length(x) + 2  # +2 because of header
 
-    if(mash_method %identical% 'row' && nrow(res) > length(x)){
+    if(mash_method %identical% "row" && nrow(res) > length(x)){
       if(insert_blank_row){
         sel_rows <- seq(
           sep_height_start + row_off, nrow(res) + row_off,
@@ -446,7 +537,9 @@ write_worksheet.Stacked_table <- function(
   append = FALSE,
   start_row = 1L,
   spacing = attr(x, 'spacing'),
-  ...
+  ...,
+  named_regions = TRUE,
+  named_regions_prefix = NA_character_
 ){
   crow    <- start_row
 
@@ -456,7 +549,9 @@ write_worksheet.Stacked_table <- function(
     sheet = sheet,
     start_row = crow,
     append = append,
-    ...
+    ...,
+    named_regions = named_regions,
+    named_regions_prefix = c(table_id(x), "stacked")
   )
 
 
@@ -470,7 +565,9 @@ write_worksheet.Stacked_table <- function(
       sheet = sheet,
       start_row = crow,
       append = TRUE,
-      ...)
+      named_regions_prefix = c(table_id(x), "stacked"),
+      ...
+    )
   }
 
   return(wb)
@@ -534,6 +631,17 @@ view_xlsx <- function(
   x,
   ...
 ){
-  openxlsx::openXL(as_workbook(x, ...))
+  openxlsx::openXL(as_workbook(x, ...,  named_regions = FALSE))
   invisible()
+}
+
+
+
+
+make_region_name <- function(...){
+  x <- list(...)
+  x <- x[sapply(x, Negate(is.null))]
+  x <- unlist(x)
+  x <- c(x[!is.na(x)], stringi::stri_rand_strings(1, 8))
+  paste(x, collapse = "_")
 }

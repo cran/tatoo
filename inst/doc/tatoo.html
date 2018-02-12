@@ -12,7 +12,7 @@
 
 <meta name="author" content="Stefan Fleck" />
 
-<meta name="date" content="2018-01-23" />
+<meta name="date" content="2018-02-12" />
 
 <title>tatoo package vignette</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">tatoo package vignette</h1>
 <h4 class="author"><em>Stefan Fleck</em></h4>
-<h4 class="date"><em>2018-01-23</em></h4>
+<h4 class="date"><em>2018-02-12</em></h4>
 
 
 <div id="TOC">
@@ -94,7 +94,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="kw">library</span>(tatoo)</code></pre></div>
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
-<p>tatoo (“table tools”) functions to combine data.frames in ways that require additional effort in base R, and to add metadata (id, title, …) that can be used for printing and xlsx export. The Tatoo_report class is provided as a convenient helper to write several such tables to a workbook, one table per worksheet.</p>
+<p>tatoo is designed for creating excel reports from lists of <code>data.frame</code>s with minimal effort, while still providing some basic formatting capabillities. tatoo functions can combine data.frames in ways that require additional effort in base R, and to add metadata (id, title, …) that can be used for printing and xlsx export. The Tatoo_report class is provided as a convenient helper to write several such tables to a workbook, one table per worksheet.</p>
 <p>Tatoo tables and reports can directly be saved to .xlsx files, or convert to <code>Workbook</code> objects with <code>as_workbook()</code> so that you can process them further using the <em>openxlsx</em> package. While tatoo implements convenient print methods so that you can preview the tables you created in the console, most of the functionality provided by this package only makes real sense for xlsx export.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
   <span class="dt">Species =</span> <span class="kw">c</span>(<span class="st">&quot;setosa&quot;</span>, <span class="st">&quot;versicolor&quot;</span>, <span class="st">&quot;virginica&quot;</span>),

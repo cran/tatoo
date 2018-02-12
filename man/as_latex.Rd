@@ -59,9 +59,10 @@ Object's pdf representation on a pdf viewer (powered by \code{\link[=open_file]{
 }
 \details{
 \code{as_latex()} and co. are designed to produce nice looking output with a
-minimum of user input required. This is useful if you want a quick preview
-or printout of a table.  If you need customized Latex the output, you
-should take a look at the packages \link[kableExtra:kableExtra]{kableExtra::kableExtra}, \strong{xtable}, or \strong{huxtable}.
+minimum of user input required. This is useful if you want a quick preview or
+printout of a table.  If you need customized Latex the output, you should
+take a look at the packages \link[kableExtra:kableExtra]{kableExtra::kableExtra}, \strong{xtable}, or
+\strong{huxtable}.
 }
 \section{Latex Packages}{
 

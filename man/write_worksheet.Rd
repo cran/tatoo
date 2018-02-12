@@ -8,22 +8,27 @@
 \alias{write_worksheet.Stacked_table}
 \title{Write Data to an openxlsx Worksheet}
 \usage{
-write_worksheet(x, wb, sheet, append = FALSE, start_row = 1L, ...)
+write_worksheet(x, wb, sheet, append = FALSE, start_row = 1L, ...,
+  named_regions = TRUE, named_regions_prefix = NA_character_)
 
 \method{write_worksheet}{Tagged_table}(x, wb,
   sheet = sanitize_excel_sheet_names(attr(x, "meta")$table_id),
-  append = FALSE, start_row = 1L, ...)
+  append = FALSE, start_row = 1L, ..., named_regions = TRUE,
+  named_regions_prefix = NA_character_)
 
 \method{write_worksheet}{Composite_table}(x, wb, sheet, append = FALSE,
-  start_row = 1L, ...)
+  start_row = 1L, ..., named_regions = TRUE,
+  named_regions_prefix = NA_character_)
 
 \method{write_worksheet}{Mashed_table}(x, wb, sheet, append = FALSE,
   start_row = 1L, mash_method = attr(x, "mash_method"), id_vars = attr(x,
   "id_vars"), insert_blank_row = attr(x, "insert_blank_row"),
-  sep_height = attr(x, "sep_height"), ...)
+  sep_height = attr(x, "sep_height"), ..., named_regions = TRUE,
+  named_regions_prefix = NA_character_)
 
 \method{write_worksheet}{Stacked_table}(x, wb, sheet, append = FALSE,
-  start_row = 1L, spacing = attr(x, "spacing"), ...)
+  start_row = 1L, spacing = attr(x, "spacing"), ..., named_regions = TRUE,
+  named_regions_prefix = NA_character_)
 }
 \arguments{
 \item{x}{A \code{Tatoo_table}.}
@@ -32,13 +37,23 @@ write_worksheet(x, wb, sheet, append = FALSE, start_row = 1L, ...)
 
 \item{sheet}{The worksheet to write to. Can be the worksheet index or name.}
 
-\item{append}{Logical. Whether or not to append to an existing worksheet or
+\item{append}{\code{logical} Whether or not to append to an existing worksheet or
 create a new one}
 
 \item{start_row}{A scalar integer specifying the starting row to write to.}
 
 \item{...}{Additional arguments passed on to methods for overriding the
 styling attributes of the \code{Tatoo_tables} you want to export.}
+
+\item{named_regions}{\code{logical}. If \code{TRUE} (default) named regions are created
+in the target excel file to identify different parts of the tables
+(header, body, column names, etc...). These named regions can, for example,
+be used for applying formats. Creating named regions can be switched of
+as this might impact performance of the excel conversion and writing of
+excel files for workbooks with large numbers of tables.}
+
+\item{named_regions_prefix}{\code{character} scalar. Prefix to write in front
+of all named regions created by \code{write_worksheet}}
 
 \item{mash_method}{either \code{"row"} or \code{"col"}. Should the tables be mashed
 together with alternating rows or with alternating columns?}
@@ -52,7 +67,7 @@ blank rows between mash-groups. \emph{Warning: this converts all columns to
 character.} Use with care.}
 
 \item{sep_height}{Only has an effect when exporting to \code{xlsx}. if
-\code{insert_blank_row == TRUE}, hight of the inserted row, else height of the
+\code{insert_blank_row == TRUE}, height of the inserted row, else height of the
 top row of each mash-group.}
 
 \item{spacing}{Number of lineskips between the tables when exporting to

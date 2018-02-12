@@ -4,6 +4,7 @@
 \alias{meta<-}
 \alias{meta}
 \alias{table_id<-}
+\alias{table_id}
 \alias{title<-}
 \alias{longtitle<-}
 \alias{subtitle<-}
@@ -15,6 +16,8 @@ meta(x) <- value
 meta(x)
 
 table_id(x) <- value
+
+table_id(x)
 
 title(x) <- value
 

@@ -1,9 +1,17 @@
+# tatoo 1.1.0
+
+* Add Named Regions for table parts Excel Sheets to make formatting easier
+* Added `walk_regions()` and `map_regions()` to mainuplate cells in named
+  regions within a `Workbook` (e.g. apply formatting to them)
+  
+
 # tatoo 1.0.10
 
 * Bugfix release 
 * Fixed faulty example code for `open_file()`
 * Removed default arguments of `save_*()` functions (they wrote to the users
   home directory by default)
+
 
 # tatoo 1.0.9
 

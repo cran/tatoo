@@ -24,7 +24,7 @@ blank rows between mash-groups. \emph{Warning: this converts all columns to
 character.} Use with care.}
 
 \item{sep_height}{Only has an effect when exporting to \code{xlsx}. if
-\code{insert_blank_row == TRUE}, hight of the inserted row, else height of the
+\code{insert_blank_row == TRUE}, height of the inserted row, else height of the
 top row of each mash-group.}
 
 \item{...}{passed on to methods}

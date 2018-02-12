@@ -9,7 +9,7 @@
 \alias{as_lines.Composite_table}
 \alias{as_lines.Tatoo_report}
 \alias{as_lines.TT_meta}
-\title{Create a line-by-line text representation of an R Object}
+\title{Create a line-by-line text representation of an \R object}
 \usage{
 as_lines(x, color = TRUE, ...)
 
@@ -32,7 +32,7 @@ as_lines(x, color = TRUE, ...)
 \arguments{
 \item{x}{Any \R object.}
 
-\item{color}{Use colors (via \link{colt})}
+\item{color}{Use colors (via \pkg{colt})}
 
 \item{...}{passed on methods.}
 
@@ -51,6 +51,6 @@ to be mashed. If supplied, columns of both input tables are combined with
 A character vector (one element per line).
 }
 \description{
-Creates a line-by-line representation of an \R Obeject (usually a
+Creates a line-by-line representation of an \R object (usually a
 \code{Tatoo_table}). This is the function powers all \code{Tatoo_table} print methods.
 }
