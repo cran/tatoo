@@ -113,12 +113,15 @@ Tagged_table <- function(
 #'
 #' @param table_id A scalar (will be coerced to `character`)
 #' @param title A scalar (will be coerced to `character`)
-#' @param longtitle A vector. If `length > 1` the title will be displayed
-#'   in several rows
-#' @param subtitle A vector. If `length > 1` the title will be displayed
-#'   in several rows
-#' @param footer A vector. If `length > 1` the title will be displayed
-#'   in several rows
+#' @param longtitle A vector. If `length > 1` the title will be displayed in
+#'   several rows
+#' @param subtitle A vector. If `length > 1` the title will be displayed in
+#'   several rows
+#' @param footer A vector. If `length > 1` the title will be displayed in
+#'   several rows
+#' @param .print_table_id `logical` vector. Whether or not `table_id` should be
+#'   added to the title of the table in the various output formats. It is
+#'   recommended to use table_ids only internally (i.e. for [walk_regions()]).
 #'
 #' @return a TT_meta object.
 #' @seealso [Tagged_table]
@@ -131,21 +134,25 @@ tt_meta <- function(
   title = NULL,
   longtitle = title,
   subtitle = NULL,
-  footer = NULL
+  footer = NULL,
+  .print_table_id = FALSE
 ){
-  assert_that(rlang::is_scalar_atomic(table_id) || is.null(table_id))
-  assert_that(rlang::is_scalar_atomic(title) || is.null(title))
+  assert_that(
+    is_scalar_atomic(table_id) || is.null(table_id),
+    is_scalar_atomic(title) || is.null(title),
 
-  assert_that(is.null(longtitle) || rlang::is_atomic(longtitle))
-  assert_that(is.null(subtitle)  || rlang::is_atomic(subtitle))
-  assert_that(is.null(footer)    || rlang::is_atomic(footer))
+    is.null(longtitle) || is.atomic(longtitle),
+    is.null(subtitle)  || is.atomic(subtitle),
+    is.null(footer)    || is.atomic(footer),
+    is_scalar_bool(.print_table_id)
+  )
 
   if(all(
-      is.null(table_id),
-      is.null(title),
-      is.null(longtitle),
-      is.null(subtitle),
-      is.null(footer))
+    is.null(table_id),
+    is.null(title),
+    is.null(longtitle),
+    is.null(subtitle),
+    is.null(footer))
   ){
     stop(
       'Tagged_tables must at least contain one of the following:
@@ -194,13 +201,9 @@ is_Tagged_table <- function(x){
 #'
 #' @export
 print.Tagged_table <- function(x, ...){
-  lapply(
-    as_lines(
-      x,
-      ...
-    ),
-    function(y) cat(y, "\n")
-  )
+  lines <- as_lines(x, ...)
+  lines <- strip_newlines(lines)
+  cat(lines, sep = "\n")
 
   invisible(x)
 }
@@ -361,7 +364,7 @@ table_id <- function(x){
 #'   `list(longtitle = value)`
 #'
 assign_tt_meta <- function(x, assignment){
-  assert_that(rlang::is_scalar_list(assignment))
+  assert_that(is_scalar_list(assignment))
   assert_that(identical(
     length(names(assignment)), 1L
   ))

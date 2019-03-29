@@ -43,14 +43,10 @@ please refer to the documentation of \code{\link[=write_worksheet]{write_workshe
 \code{as_workbook()} is just a wrapper. Additional possible function arguments way
 vary depending on which \code{Tatoo_table} you want to export.
 
-Converting a \code{\link{Tatoo_report}} will result in an openxlsx Workbook with
-several sheets. The sheet names will be generated from the names of
-\code{x} if \code{x} has names.
-
 \code{save_xlsx()} is a wrapper for saving a \code{Tatoo_table} directly
 to an \file{xlsx} file.
 
-\code{view_xlsx()} is another wrapper for viewing a \code{Tatoo_table}'s
+\code{view_xlsx()} is another wrapper for viewing a \code{Tatoo_table}"s
 \file{xlsx} representation in your favourite spreadsheet program (powered by
 \code{\link[openxlsx:openXL]{openxlsx::openXL()}}).
 }
@@ -64,8 +60,8 @@ dat <- data.frame(
 
 # Assign metadata to convert dat to a Tagged_table
 
-title(dat) <- 'Iris excerpt'
-footer(dat) <-  'An example based on the iris dataset'
+title(dat) <- "Iris excerpt"
+footer(dat) <-  "An example based on the iris dataset"
 
 
 # Convert to Workbook or save als xlsx
@@ -78,3 +74,4 @@ save_xlsx(dat, tempfile(fileext = ".xlsx"), overwrite = TRUE)
 \seealso{
 Other xlsx exporters: \code{\link{write_worksheet}}
 }
+\concept{xlsx exporters}

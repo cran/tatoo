@@ -36,3 +36,4 @@ Other as_latex methods: \code{\link{as_latex.Mashed_table}},
   \code{\link{as_latex.Tatoo_report}},
   \code{\link{as_latex.data.frame}}, \code{\link{as_latex}}
 }
+\concept{as_latex methods}

@@ -5,14 +5,14 @@
 \alias{as.data.frame.Mashed_table}
 \title{Convert a Mashed Table to a data.table or data.frame}
 \usage{
-\method{as.data.table}{Mashed_table}(x, mash_method = attr(x, "mash_method"),
-  insert_blank_row = attr(x, "insert_blank_row"), id_vars = attr(x,
-  "id_vars"), suffixes = names(x))
+\method{as.data.table}{Mashed_table}(x, mash_method = attr(x,
+  "mash_method"), insert_blank_row = attr(x, "insert_blank_row"),
+  id_vars = attr(x, "id_vars"), suffixes = names(x))
 
-\method{as.data.frame}{Mashed_table}(x, row.names = NULL, optional = FALSE,
-  mash_method = attr(x, "mash_method"), insert_blank_row = attr(x,
-  "insert_blank_row"), id_vars = attr(x, "id_vars"), suffixes = names(x),
-  ...)
+\method{as.data.frame}{Mashed_table}(x, row.names = NULL,
+  optional = FALSE, mash_method = attr(x, "mash_method"),
+  insert_blank_row = attr(x, "insert_blank_row"), id_vars = attr(x,
+  "id_vars"), suffixes = names(x), ...)
 }
 \arguments{
 \item{x}{a \link{Mashed_table}}
@@ -39,7 +39,8 @@ used for making unique the names of columns.}
     \code{\link{make.names}}) is optional.  Note that all of \R's
     \pkg{base} package \code{as.data.frame()} methods use
     \code{optional} only for column names treatment, basically with the
-    meaning of \code{\link{data.frame}(*, check.names = !optional)}.}
+    meaning of \code{\link{data.frame}(*, check.names = !optional)}.
+    See also the \code{make.names} argument of the \code{matrix} method.}
 
 \item{...}{passed on to \code{as.data.frame.data.table()}}
 }

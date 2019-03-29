@@ -72,3 +72,4 @@ Other Tatoo tables: \code{\link{mash_table}},
   \code{\link{stack_table}}, \code{\link{tag_table}},
   \code{\link{tatoo_table}}
 }
+\concept{Tatoo tables}

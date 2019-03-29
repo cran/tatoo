@@ -65,3 +65,4 @@ Other Tatoo tables: \code{\link{comp_table}},
   \code{\link{mash_table}}, \code{\link{tag_table}},
   \code{\link{tatoo_table}}
 }
+\concept{Tatoo tables}

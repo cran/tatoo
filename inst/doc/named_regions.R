@@ -7,8 +7,8 @@ library(tatoo)
 #  wb <- as_workbook(iris[1:5, ])
 
 ## ---- eval = FALSE-------------------------------------------------------
-#  style_colnames <- openxlsx::createStyle(textDecoration = "bold", valign = "top")
-#  style_body     <- openxlsx::createStyle(textRotation = 10)
+#  style_colnames <- openxlsx::createStyle(textDecoration = "bold")
+#  
 #  walk_regions(wb, "colnames", openxlsx::addStyle, style_colnames)
 #  walk_regions(wb, "table",    openxlsx::setColWidths, widths = 14)
 #  

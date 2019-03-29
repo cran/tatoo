@@ -31,9 +31,8 @@ as_lines.data.frame <- function(
     as.matrix(unname(x))
   )
 
-  res[is.na(res)] <- "NA"
   res <- apply(res, 2, function(x) {
-    stringi::stri_pad_left(x, max(crayon::col_nchar(x), na.rm = TRUE))
+    format(x)
   })
   res <- apply(res, 1, paste, collapse = " ")
 
@@ -184,19 +183,13 @@ as_lines.Composite_table <- function(
   }
 
   # Pad columns
-
   prep_col <- function(x, colname){
     i_nan <- is.nan(x)
     i_na  <- is.na(x)
-    x <- as.character(x)
-    x[i_nan] <- 'NAN'
-    x[i_na]  <- 'NA'
-    x <- c(colname, x)
-
-    pad_width <- max(crayon::col_nchar(x))
-    stringi::stri_pad_left(as.character(x), pad_width)
+    x     <- format(x)
+    x     <- c(colname, x)
+    pad_left(x, max(crayon::col_nchar(x)))
   }
-
 
   dd <- vector('list', ncol(x))
 
@@ -303,7 +296,7 @@ as_lines.TT_meta <- function(x, color = TRUE, ...){
 
 
   if(!color) style_meta <- identity
-  purrr::map_chr(unlist(res), style_meta)
+  vapply(unlist(res), style_meta, character(1))
 }
 
 
@@ -347,20 +340,20 @@ as_lines_several_tables <- function(
   ...
 ){
   # Preconditions
-  assert_that(rlang::is_scalar_character(indent))
+  assert_that(is_scalar_character(indent))
   assert_that(
-    rlang::is_scalar_character(sep1) ||
-    rlang::is_scalar_integerish(sep1)
+    is_scalar_character(sep1) ||
+    is_scalar_integerish(sep1)
   )
   assert_that(
-    rlang::is_scalar_character(sep2) ||
-    rlang::is_scalar_integerish(sep2)
+    is_scalar_character(sep2) ||
+    is_scalar_integerish(sep2)
   )
   assert_that(is.null(headings) || identical(length(headings), length(dat)))
 
 
   # Process arguments
-  tables_char  <- purrr::map(dat, as_lines, color = color)
+  tables_char  <- lapply(dat, as_lines, color = color)
   tables_width <- max(crayon::col_nchar(unlist(tables_char)))
   sepline1 <- make_sepline(
     sep1, width = tables_width, offset = crayon::col_nchar(indent)
@@ -376,16 +369,18 @@ as_lines_several_tables <- function(
 
   # Formatting
   if(is.null(headings)){
-    res <- purrr::map(
+    res <- lapply(
       tables_char,
       function(.x) list(sepline2, paste0(indent, .x))
     )
   } else {
-    res <- purrr::map2(
-      headings, tables_char,
-      function(.x, .y) c(list(sepline2, .x, paste0(indent, .y)))
+    res <- mapply(
+      function(.x, .y) c(list(sepline2, .x, paste0(indent, .y))),
+      headings, tables_char, SIMPLIFY = FALSE
     )
   }
+
+
 
   res[[1]][[1]] <- NULL  # remove unwanted initial sepline
 

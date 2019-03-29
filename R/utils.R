@@ -23,8 +23,10 @@
 #'
 #'   # [1] "a very_ long  vector_ containi0" "a very_ long  vector_ containi1"
 sanitize_excel_sheet_names <- function(x, replace = '_'){
-  assert_that(rlang::is_vector(x))
-  assert_that(rlang::is_scalar_character(replace))
+  assert_that(
+    is_vector(x),
+    is_scalar_character(replace)
+  )
   x <- as.character(x)
 
   invalid_chars_regex <- "\\[|\\]|\\*|\\?|:|\\/|\\\\"
@@ -41,8 +43,10 @@ sanitize_excel_sheet_names <- function(x, replace = '_'){
     }
   }
 
-  assert_that(is.character(res))
-  assert_that(all_are_distinct(res, silent = TRUE))
+  assert_that(
+    is.character(res),
+    all_are_distinct(res)
+  )
   return(res)
 }
 
@@ -96,13 +100,6 @@ get_dot_names <- function(...){
 
 
 
-print_lines <- function(x){
-  for (i in x) cat(i, "\n")
-}
-
-
-
-
 make_sepline <- function(x, width, offset = 0){
   if(is.character(x)){
     res <- paste(rep(x, width + offset), collapse = '')
@@ -126,4 +123,11 @@ require_knitr <- function(){
 
 require_openxlsx <- function(){
   assert_that(requireNamespace("openxlsx", quietly = TRUE))
+}
+
+
+
+
+strip_newlines <- function(x){
+  gsub("\r?\n|\r", " ", x)
 }

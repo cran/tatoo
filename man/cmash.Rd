@@ -7,8 +7,8 @@
 \usage{
 rmash(..., rem_ext = NULL, insert_blank_row = FALSE, meta = NULL)
 
-cmash(..., rem_ext = NULL, id_vars = NULL, suffixes = names(list(...)),
-  meta = NULL)
+cmash(..., rem_ext = NULL, id_vars = NULL,
+  suffixes = names(list(...)), meta = NULL)
 }
 \arguments{
 \item{...}{either several \code{data.frames}, \code{data.table}s or a single

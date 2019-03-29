@@ -9,10 +9,11 @@
 \usage{
 as_Composite_table(x, ...)
 
-\method{as_Composite_table}{Mashed_table}(x, id_vars = attr(x, "id_vars"),
-  meta = attr(x, "meta"), ...)
+\method{as_Composite_table}{Mashed_table}(x, id_vars = attr(x,
+  "id_vars"), meta = attr(x, "meta"), ...)
 
-\method{as_Composite_table}{data.frame}(x, sep = ".", reverse = FALSE, ...)
+\method{as_Composite_table}{data.frame}(x, sep = ".", reverse = FALSE,
+  ...)
 
 is_Composite_table(x, ...)
 }
@@ -43,13 +44,6 @@ and \code{FALSE} otherwise.
 \description{
 Converts other \R objects to \code{Composite_tables} by automatically creating
 multi-column names from the properties of the objects.
-
-\code{as_Composite_table.Mashed_table()} extracts the multi-column names from the
-column names of the individual data.frames that make up a \link{Mashed_table},
-and the column names from the names of the Mashed Table.
-
-\code{as_Composite_table.data.frame()} extracts the multi-column names from the
-column names of a \code{data.frame} based on a separator.
 }
 \examples{
 

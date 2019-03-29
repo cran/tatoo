@@ -18,15 +18,15 @@ dat \%assert_class\% class
 \item{class}{the class to be checked for}
 }
 \value{
-is_class returns TRUE/FALSE, assert_class returns TRUE or fails with
-        an error message.
+`is_class()` returns `TRUE`/`FALSE`, `assert_class()` returns `TRUE`
+  or fails with an error message.
 }
 \description{
 These functions are designed to be used in combination with the assertthat
 package
 }
 \details{
-is_class returns TRUE/FALSE. It comes with a on_failure function and
+`is_class returns()` `TRUE`/`FALSE`. It comes with a on_failure function and
 is designed to be used in conjunction with the assertthat package.
-assert_class() and its infix version %assert_class% fail with an error message
+`assert_class()` and its infix version %assert_class% fail with an error message
 }

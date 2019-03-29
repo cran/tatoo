@@ -32,9 +32,6 @@ This applies a \code{.fun} to all named regions in a workbook names match
 \code{Tatoo_tables} add named regions for certain parts of the Table. See also
 \code{vignette("named_regions")} for how the names of named regions are
 constructed by tatoo.
-
-\code{map_regions()} is a wrapper for \code{walk_regions()} for people who prefer
-standard R copy-on-modify semantics over openxlsx's pass-by-reference.
 }
 \examples{
 

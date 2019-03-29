@@ -12,14 +12,14 @@
 
 <meta name="author" content="Stefan Fleck" />
 
-<meta name="date" content="2018-02-12" />
+<meta name="date" content="2019-03-29" />
 
 <title>Formatting Reports with Named Regions</title>
 
 
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
+<style type="text/css" data-origin="pandoc">
 div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
   margin: 0; padding: 0; vertical-align: baseline; border: none; }
@@ -55,7 +55,29 @@ code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
 code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+
 </style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 
 
 
@@ -70,7 +92,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Formatting Reports with Named Regions</h1>
 <h4 class="author"><em>Stefan Fleck</em></h4>
-<h4 class="date"><em>2018-02-12</em></h4>
+<h4 class="date"><em>2019-03-29</em></h4>
 
 
 
@@ -86,8 +108,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <img src="data:image/png;base64,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" alt="a plain table" />
 <p class="caption">a plain table</p>
 </div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">style_colnames &lt;-<span class="st"> </span>openxlsx<span class="op">::</span><span class="kw">createStyle</span>(<span class="dt">textDecoration =</span> <span class="st">&quot;bold&quot;</span>, <span class="dt">valign =</span> <span class="st">&quot;top&quot;</span>)
-style_body     &lt;-<span class="st"> </span>openxlsx<span class="op">::</span><span class="kw">createStyle</span>(<span class="dt">textRotation =</span> <span class="dv">10</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">style_colnames &lt;-<span class="st"> </span>openxlsx<span class="op">::</span><span class="kw">createStyle</span>(<span class="dt">textDecoration =</span> <span class="st">&quot;bold&quot;</span>)
+
 <span class="kw">walk_regions</span>(wb, <span class="st">&quot;colnames&quot;</span>, openxlsx<span class="op">::</span>addStyle, style_colnames)
 <span class="kw">walk_regions</span>(wb, <span class="st">&quot;table&quot;</span>,    openxlsx<span class="op">::</span>setColWidths, <span class="dt">widths =</span> <span class="dv">14</span>)</code></pre></div>
 <div class="figure">
@@ -122,22 +144,22 @@ style_body     &lt;-<span class="st"> </span>openxlsx<span class="op">::</span><
    <span class="kw">unique</span>(<span class="kw">regions</span>(<span class="kw">as_workbook</span>(x))<span class="op">$</span>region)
  }</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">show_regions</span>(<span class="kw">mash_table</span>(iris, iris))</code></pre></div>
-<pre><code>## [1] &quot;row_mashed_table_BZmMCvgx&quot;         
-## [2] &quot;row_mashed_table_colnames_7XyDdMks&quot;
-## [3] &quot;row_mashed_table_body_FfMhPzba&quot;</code></pre>
+<pre><code>## [1] &quot;row_mashed_table_4C60nkOI&quot;         
+## [2] &quot;row_mashed_table_colnames_OjPIjVua&quot;
+## [3] &quot;row_mashed_table_body_UZlqbZnr&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">show_regions</span>(<span class="kw">mash_table</span>(iris, iris, <span class="dt">mash_method =</span> <span class="st">&quot;col&quot;</span>))</code></pre></div>
-<pre><code>## [1] &quot;col_mashed_table_tMqx4oBw&quot;         
-## [2] &quot;col_mashed_table_colnames_gLN8z5xF&quot;
-## [3] &quot;col_mashed_table_body_d87lVHck&quot;</code></pre>
+<pre><code>## [1] &quot;col_mashed_table_0qRGSHrE&quot;         
+## [2] &quot;col_mashed_table_colnames_VFYxT95c&quot;
+## [3] &quot;col_mashed_table_body_uw6BPuSw&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">show_regions</span>(<span class="kw">comp_table</span>(iris, iris))</code></pre></div>
-<pre><code>## [1] &quot;composite_table_multinames_VMNSNupn&quot;
-## [2] &quot;composite_table_T43xz8PC&quot;           
-## [3] &quot;composite_table_colnames_QbuPlYzr&quot;  
-## [4] &quot;composite_table_body_82bEbPui&quot;</code></pre>
+<pre><code>## [1] &quot;composite_table_multinames_Rbyj5EhU&quot;
+## [2] &quot;composite_table_I2KeppiF&quot;           
+## [3] &quot;composite_table_colnames_TRAl9Aft&quot;  
+## [4] &quot;composite_table_body_3SHBBNtU&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">show_regions</span>(<span class="kw">stack_table</span>(iris, iris))</code></pre></div>
-<pre><code>## [1] &quot;stacked_table_EagPuuDT&quot;          &quot;stacked_table_colnames_e89Sd0DI&quot;
-## [3] &quot;stacked_table_body_jn0sMk2s&quot;     &quot;stacked_table_ZyIOHDsq&quot;         
-## [5] &quot;stacked_table_colnames_EGo3o3Ja&quot; &quot;stacked_table_body_8eIprfjm&quot;</code></pre>
+<pre><code>## [1] &quot;stacked_table_Hqg8ZSx2&quot;          &quot;stacked_table_colnames_hMgK2Xpx&quot;
+## [3] &quot;stacked_table_body_pshmTUZC&quot;     &quot;stacked_table_FFa8BFEC&quot;         
+## [5] &quot;stacked_table_colnames_uLWp6NfG&quot; &quot;stacked_table_body_zBlS9aS5&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">show_regions</span>(<span class="kw">tag_table</span>(
   iris, 
   <span class="kw">tt_meta</span>(
@@ -145,9 +167,9 @@ style_body     &lt;-<span class="st"> </span>openxlsx<span class="op">::</span><
     <span class="dt">title =</span> <span class="st">&quot;a title&quot;</span>, 
     <span class="dt">footer =</span> <span class="st">&quot;blahblubb&quot;</span>)
 ))</code></pre></div>
-<pre><code>## [1] &quot;tab1_header_aH6LrjMN&quot;         &quot;tab1_table_My0dbbet&quot;         
-## [3] &quot;tab1_table_colnames_cqhSrQrB&quot; &quot;tab1_table_body_VgSRwjDi&quot;    
-## [5] &quot;tab1_footer_kSG4GtiR&quot;</code></pre>
+<pre><code>## [1] &quot;tab1_header_9qWWD86l&quot;         &quot;tab1_table_hLlVjHtT&quot;         
+## [3] &quot;tab1_table_colnames_WUjvnMn8&quot; &quot;tab1_table_body_MuLCtApn&quot;    
+## [5] &quot;tab1_footer_96cJNpVM&quot;</code></pre>
 </div>
 <div id="formatting-parts-of-tables-with-walk_regions" class="section level1">
 <h1>Formatting parts of tables with walk_regions</h1>

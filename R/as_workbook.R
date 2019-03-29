@@ -26,8 +26,8 @@
 #'
 #' # Assign metadata to convert dat to a Tagged_table
 #'
-#' title(dat) <- 'Iris excerpt'
-#' footer(dat) <-  'An example based on the iris dataset'
+#' title(dat) <- "Iris excerpt"
+#' footer(dat) <-  "An example based on the iris dataset"
 #'
 #'
 #' # Convert to Workbook or save als xlsx
@@ -41,7 +41,7 @@ as_workbook <- function(
   ...
 ){
   require_openxlsx()
-  UseMethod('as_workbook')
+  UseMethod("as_workbook")
 }
 
 
@@ -57,7 +57,7 @@ as_workbook.default <- function(
   ...
 ){
   assert_that(is.scalar(sheet))
-  assert_that(is.character(sheet) || rlang::is_integerish(sheet))
+  assert_that(is.character(sheet) || is_integerish(sheet))
 
   wb <- openxlsx::createWorkbook()
   wb <- write_worksheet(
@@ -84,8 +84,9 @@ as_workbook.Tatoo_report <- function(
 ){
   wb <- openxlsx::createWorkbook()
 
-  for(i in seq_along(x)){
-    if(is.null(names(x))){
+
+  for (i in seq_along(x)){
+    if (is.null(names(x))){
       sheet_name <- i
     } else {
       sheet_name <- sanitize_excel_sheet_names(names(x))[[i]]
@@ -100,7 +101,7 @@ as_workbook.Tatoo_report <- function(
       ...
     )
 
-    wb %assert_class% 'Workbook'
+    wb %assert_class% "Workbook"
   }
 
   return(wb)
@@ -160,13 +161,13 @@ write_worksheet <- function(
   named_regions = TRUE,
   named_regions_prefix = NA_character_
 ){
-  wb %assert_class% 'Workbook'
+  wb %assert_class% "Workbook"
   assert_that(is.scalar(sheet))
   assert_that(is.flag(append))
-  assert_that(rlang::is_scalar_integerish(start_row))
+  assert_that(is_scalar_integerish(start_row))
   require_openxlsx()
 
-  UseMethod('write_worksheet')
+  UseMethod("write_worksheet")
 }
 
 
@@ -183,7 +184,7 @@ write_worksheet.default <- function(
   named_regions = TRUE,
   named_regions_prefix = NA_character_
 ){
-  if(!append){
+  if (!append){
     openxlsx::addWorksheet(wb, sheet)
   }
 
@@ -225,7 +226,7 @@ write_worksheet.default <- function(
     )
   }
 
-  wb %assert_class% 'Workbook'
+  wb %assert_class% "Workbook"
   return(wb)
 }
 
@@ -233,24 +234,29 @@ write_worksheet.default <- function(
 
 
 #' @export
+#' @param print_table_id `logical` vector. Whether or not `table_id` should be
+#'   added to the title of the table. It is recommended to use table_ids only
+#'   internally (i.e. for [walk_regions()]).
 #' @rdname write_worksheet
 write_worksheet.Tagged_table <- function(
   x,
   wb,
-  sheet = sanitize_excel_sheet_names(attr(x, 'meta')$table_id),
+  sheet = sanitize_excel_sheet_names(attr(x, "meta")$table_id),
   append = FALSE,
   start_row = 1L,
   ...,
+  print_table_id = attr(x, "meta")[[".print_table_id"]],
   named_regions = TRUE,
   named_regions_prefix = NA_character_
 ){
-  wb %assert_class% 'Workbook'
-  assert_that(has_attr(x, 'meta'))
-  meta <- attr(x, 'meta')
+  wb %assert_class% "Workbook"
+  assert_that(has_attr(x, "meta"))
+  meta <- attr(x, "meta")
+
 
   wb <- wb$copy()
 
-  if(!append){
+  if (!append){
     openxlsx::addWorksheet(wb, sheet)
   }
 
@@ -259,8 +265,8 @@ write_worksheet.Tagged_table <- function(
   # Construct header
   header <- list()
 
-  if (!is.null(meta$table_id) && !is.null(meta$title)){
-    header$title <- paste(meta$table_id, meta$title, sep = ': ')
+  if (!is.null(meta$table_id) && !is.null(meta$title) && isTRUE(meta$.print_table_id)){
+    header$title <- paste(meta$table_id, meta$title, sep = ": ")
 
   } else if (!is.null(meta$title)){
     header$title <- meta$title
@@ -270,7 +276,7 @@ write_worksheet.Tagged_table <- function(
   }
 
 
-  if(!identical(meta$longtitle, meta$title)){
+  if (!identical(meta$longtitle, meta$title)){
     header$longtitle <- meta$longtitle
   }
 
@@ -291,7 +297,7 @@ write_worksheet.Tagged_table <- function(
   )
 
 
-  if(named_regions && length(header) > 0){
+  if (named_regions && length(header) > 0){
     openxlsx::createNamedRegion(
       wb,
       sheet = sheet,
@@ -306,7 +312,7 @@ write_worksheet.Tagged_table <- function(
   crow <- crow + length(header) + 1
   ## hacky, but NextMethod did not do what i wanted when ... were passed to
   ## this function
-  class(x) <- class(x)[!class(x) == 'Tagged_table']
+  class(x) <- class(x)[!class(x) == "Tagged_table"]
 
   wb <- write_worksheet(
     x,
@@ -362,26 +368,26 @@ write_worksheet.Composite_table <- function(
   named_regions_prefix = NA_character_
 ){
   # Pre-condtions
-  assert_that(has_attr(x, 'multinames'))
+  assert_that(has_attr(x, "multinames"))
 
   # Process arguments
   wb <- wb$copy()
 
-  if(!append){
+  if (!append){
     openxlsx::addWorksheet(wb, sheet)
   }
   crow   <- start_row
-  multinames <- attr(x, 'multinames')
+  multinames <- attr(x, "multinames")
 
   assert_that(multinames %identical% sort(multinames))
 
-  title_row     <- vector(mode = 'list', length = ncol(x))
+  title_row     <- vector(mode = "list", length = ncol(x))
   title_counter <- 1
 
-  for(i in seq_along(title_row)){
+  for (i in seq_along(title_row)){
     title_row[[i]] <- names(multinames)[[title_counter]]
 
-    if(i %in% multinames){
+    if (i %in% multinames){
       title_counter <- title_counter + 1
     }
   }
@@ -402,14 +408,15 @@ write_worksheet.Composite_table <- function(
       sheet = sheet,
       rows = crow,
       cols = seq_along(x),
-      name = make_region_name(named_regions_prefix, table_id(x), "composite", "table", "multinames")
+      name = make_region_name(
+        named_regions_prefix, table_id(x), "composite", "table", "multinames")
     )
   }
 
   crow <- crow + 1
 
   ## merge subtable heading cells
-  for(i in seq_along(multinames)){
+  for (i in seq_along(multinames)){
     merge_start <- ifelse(i == 1L, 1, multinames[[i-1]] + 1)  #nolint
     merge_end   <- multinames[[i]]
     openxlsx::mergeCells(
@@ -445,18 +452,18 @@ write_worksheet.Mashed_table <- function(
   sheet,
   append = FALSE,
   start_row = 1L,
-  mash_method = attr(x, 'mash_method'),
-  id_vars  = attr(x, 'id_vars'),
-  insert_blank_row = attr(x, 'insert_blank_row'),
-  sep_height = attr(x, 'sep_height'),
+  mash_method = attr(x, "mash_method"),
+  id_vars  = attr(x, "id_vars"),
+  insert_blank_row = attr(x, "insert_blank_row"),
+  sep_height = attr(x, "sep_height"),
   ...,
   named_regions = TRUE,
   named_regions_prefix = NA_character_
 ){
   # Preconditions
-    assert_that(mash_method %identical% 'col' || mash_method %identical% 'row')
+    assert_that(mash_method %identical% "col" || mash_method %identical% "row")
     assert_that(is.flag(insert_blank_row))
-    assert_that(rlang::is_scalar_integerish(sep_height))
+    assert_that(is_scalar_integerish(sep_height))
     assert_that(is.null(id_vars) || is.character(id_vars))
 
 
@@ -464,11 +471,11 @@ write_worksheet.Mashed_table <- function(
     sep_height <- as.integer(sep_height)
     wb <- wb$copy()
 
-    if(!append){
+    if (!append){
       openxlsx::addWorksheet(wb, sheet)
     }
 
-    if(mash_method %identical% 'col' &&
+    if (mash_method %identical% "col" &&
        length(names(x)) %identical% length(x)
     ){
       res <- as_Composite_table(x, meta = NULL)
@@ -501,8 +508,8 @@ write_worksheet.Mashed_table <- function(
     row_off          <- start_row - 1
     sep_height_start <- length(x) + 2  # +2 because of header
 
-    if(mash_method %identical% "row" && nrow(res) > length(x)){
-      if(insert_blank_row){
+    if (mash_method %identical% "row" && nrow(res) > length(x)){
+      if (insert_blank_row){
         sel_rows <- seq(
           sep_height_start + row_off, nrow(res) + row_off,
           by = (length(x) + 1)
@@ -536,7 +543,7 @@ write_worksheet.Stacked_table <- function(
   sheet,
   append = FALSE,
   start_row = 1L,
-  spacing = attr(x, 'spacing'),
+  spacing = attr(x, "spacing"),
   ...,
   named_regions = TRUE,
   named_regions_prefix = NA_character_
@@ -555,7 +562,7 @@ write_worksheet.Stacked_table <- function(
   )
 
 
-  for(i in seq_along(x)[-1]){
+  for (i in seq_along(x)[-1]){
     crow <- get_final_wb_row(wb, sheet)
     crow <- crow + 1 + spacing
 
@@ -594,11 +601,13 @@ save_xlsx <- function(
   overwrite = FALSE,
   ...
 ){
-  assert_that(rlang::is_scalar_character(outfile))
-  assert_that(is.flag(overwrite))
+  assert_that(
+    is_scalar_character(outfile),
+    is.flag(overwrite)
+  )
   require_openxlsx()
 
-  UseMethod('save_xlsx')
+  UseMethod("save_xlsx")
 }
 
 
@@ -619,7 +628,7 @@ save_xlsx.default <- function(
 
 
 
-#' @description  `view_xlsx()` is another wrapper for viewing a `Tatoo_table`'s
+#' @description  `view_xlsx()` is another wrapper for viewing a `Tatoo_table`"s
 #' \file{xlsx} representation in your favourite spreadsheet program (powered by
 #' [openxlsx::openXL()]).
 #'

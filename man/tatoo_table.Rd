@@ -35,3 +35,4 @@ Other Tatoo tables: \code{\link{comp_table}},
   \code{\link{mash_table}}, \code{\link{stack_table}},
   \code{\link{tag_table}}
 }
+\concept{Tatoo tables}

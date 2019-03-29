@@ -5,8 +5,8 @@
 \alias{as.data.frame.Composite_table}
 \title{Convert a Composite Table to a data.table or data.frame}
 \usage{
-\method{as.data.table}{Composite_table}(x, multinames = TRUE, sep = ".",
-  ...)
+\method{as.data.table}{Composite_table}(x, multinames = TRUE,
+  sep = ".", ...)
 
 \method{as.data.frame}{Composite_table}(x, row.names = NULL,
   optional = FALSE, multinames = TRUE, sep = ".", ...)
@@ -29,7 +29,8 @@ names}
     \code{\link{make.names}}) is optional.  Note that all of \R's
     \pkg{base} package \code{as.data.frame()} methods use
     \code{optional} only for column names treatment, basically with the
-    meaning of \code{\link{data.frame}(*, check.names = !optional)}.}
+    meaning of \code{\link{data.frame}(*, check.names = !optional)}.
+    See also the \code{make.names} argument of the \code{matrix} method.}
 }
 \value{
 a \code{data.table} or \code{data.frame}

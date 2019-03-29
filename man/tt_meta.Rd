@@ -6,21 +6,25 @@
 \title{Tagged Table Metadata}
 \usage{
 tt_meta(table_id = NULL, title = NULL, longtitle = title,
-  subtitle = NULL, footer = NULL)
+  subtitle = NULL, footer = NULL, .print_table_id = FALSE)
 }
 \arguments{
 \item{table_id}{A scalar (will be coerced to \code{character})}
 
 \item{title}{A scalar (will be coerced to \code{character})}
 
-\item{longtitle}{A vector. If \code{length > 1} the title will be displayed
-in several rows}
+\item{longtitle}{A vector. If \code{length > 1} the title will be displayed in
+several rows}
 
-\item{subtitle}{A vector. If \code{length > 1} the title will be displayed
-in several rows}
+\item{subtitle}{A vector. If \code{length > 1} the title will be displayed in
+several rows}
 
-\item{footer}{A vector. If \code{length > 1} the title will be displayed
-in several rows}
+\item{footer}{A vector. If \code{length > 1} the title will be displayed in
+several rows}
+
+\item{.print_table_id}{\code{logical} vector. Whether or not \code{table_id} should be
+added to the title of the table in the various output formats. It is
+recommended to use table_ids only internally (i.e. for \code{\link[=walk_regions]{walk_regions()}}).}
 }
 \value{
 a TT_meta object.
