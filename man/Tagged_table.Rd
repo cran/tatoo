@@ -65,8 +65,10 @@ Attribute setters: \code{\link[=meta<-]{meta<-()}}
 
 Tagged Table Metadata: \code{\link[=tt_meta]{tt_meta()}}
 
-Other Tatoo tables: \code{\link{comp_table}},
-  \code{\link{mash_table}}, \code{\link{stack_table}},
-  \code{\link{tatoo_table}}
+Other Tatoo tables: 
+\code{\link{comp_table}()},
+\code{\link{mash_table}()},
+\code{\link{stack_table}()},
+\code{\link{tatoo_table}()}
 }
 \concept{Tatoo tables}

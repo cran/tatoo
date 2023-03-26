@@ -5,17 +5,33 @@
 \alias{as.data.frame.Mashed_table}
 \title{Convert a Mashed Table to a data.table or data.frame}
 \usage{
-\method{as.data.table}{Mashed_table}(x, mash_method = attr(x,
-  "mash_method"), insert_blank_row = attr(x, "insert_blank_row"),
-  id_vars = attr(x, "id_vars"), suffixes = names(x))
+\method{as.data.table}{Mashed_table}(
+  x,
+  keep.rownames = NULL,
+  ...,
+  mash_method = attr(x, "mash_method"),
+  insert_blank_row = attr(x, "insert_blank_row"),
+  id_vars = attr(x, "id_vars"),
+  suffixes = names(x)
+)
 
-\method{as.data.frame}{Mashed_table}(x, row.names = NULL,
-  optional = FALSE, mash_method = attr(x, "mash_method"),
-  insert_blank_row = attr(x, "insert_blank_row"), id_vars = attr(x,
-  "id_vars"), suffixes = names(x), ...)
+\method{as.data.frame}{Mashed_table}(
+  x,
+  row.names = NULL,
+  optional = FALSE,
+  ...,
+  mash_method = attr(x, "mash_method"),
+  insert_blank_row = attr(x, "insert_blank_row"),
+  id_vars = attr(x, "id_vars"),
+  suffixes = names(x)
+)
 }
 \arguments{
 \item{x}{a \link{Mashed_table}}
+
+\item{keep.rownames}{ignored}
+
+\item{...}{passed on to \code{\link[=as.data.table]{as.data.table()}} or \code{\link[=as.data.frame]{as.data.frame()}} respectively}
 
 \item{mash_method}{either \code{"row"} or \code{"col"}. Should the tables be mashed
 together with alternating rows or with alternating columns?}
@@ -31,18 +47,15 @@ to be mashed. If supplied, columns of both input tables are combined with
 \item{suffixes}{a character vector of length 2 specifying the suffixes to be
 used for making unique the names of columns.}
 
-\item{row.names}{\code{NULL} or a character vector giving the row
-    names for the data frame.  Missing values are not allowed.}
+\item{row.names}{ignored}
 
 \item{optional}{logical. If \code{TRUE}, setting row names and
     converting column names (to syntactic names: see
-    \code{\link{make.names}}) is optional.  Note that all of \R's
+    \code{\link[base]{make.names}}) is optional.  Note that all of \R's
     \pkg{base} package \code{as.data.frame()} methods use
     \code{optional} only for column names treatment, basically with the
-    meaning of \code{\link{data.frame}(*, check.names = !optional)}.
+    meaning of \code{\link[base]{data.frame}(*, check.names = !optional)}.
     See also the \code{make.names} argument of the \code{matrix} method.}
-
-\item{...}{passed on to \code{as.data.frame.data.table()}}
 }
 \value{
 a \link{data.table} or \code{data.frame}

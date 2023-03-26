@@ -8,9 +8,16 @@
 \usage{
 as_latex(x, ..., kable_options = default_kable_options())
 
-save_pdf(x, outfile, ..., overwrite = FALSE, papersize = "a4paper",
-  orientation = "portrait", keep_source = FALSE,
-  template = system.file("templates", "save_tex.Rmd", package = "tatoo"))
+save_pdf(
+  x,
+  outfile,
+  ...,
+  overwrite = FALSE,
+  papersize = "a4paper",
+  orientation = "portrait",
+  keep_source = FALSE,
+  template = system.file("templates", "save_tex.Rmd", package = "tatoo")
+)
 
 view_pdf(x, ...)
 }
@@ -27,10 +34,10 @@ view_pdf(x, ...)
 \item{overwrite}{If \code{TRUE}, overwrite any existing file.}
 
 \item{papersize}{\code{character} scalar. Passed on to the latex command
-\code{\\geometry} from the 'geometry' package. Valid values are: \code{a0paper, a1paper, a2paper, a3paper, a4paper, a5paper, a6paper, b0paper, b1paper, b2paper, b3paper, b4paper, b5paper, b6paper, c0paper, c1paper, c2paper, c3paper, c4paper, c5paper, c6paper, b0j, b1j, b2j, b3j, b4j, b5j, b6j, ansiapaper, ansibpaper, ansicpaper, ansidpaper, ansiepaper, letterpaper, executivepaper, legalpaper}}
+\verb{\\\\geometry} from the 'geometry' package. Valid values are: \verb{a0paper, a1paper, a2paper, a3paper, a4paper, a5paper, a6paper, b0paper, b1paper, b2paper, b3paper, b4paper, b5paper, b6paper, c0paper, c1paper, c2paper, c3paper, c4paper, c5paper, c6paper, b0j, b1j, b2j, b3j, b4j, b5j, b6j, ansiapaper, ansibpaper, ansicpaper, ansidpaper, ansiepaper, letterpaper, executivepaper, legalpaper}}
 
 \item{orientation}{\code{character} scalar. Passed on to the latex command
-\code{\\geometry} from the 'geometry' package. Valid values are:
+\verb{\\\\geometry} from the 'geometry' package. Valid values are:
 \code{portrait}, \code{landscape}}
 
 \item{keep_source}{When saving a \file{pdf}, also put the Latex source
@@ -61,16 +68,18 @@ Object's pdf representation on a pdf viewer (powered by \code{\link[=open_file]{
 \code{as_latex()} and co. are designed to produce nice looking output with a
 minimum of user input required. This is useful if you want a quick preview or
 printout of a table.  If you need customized Latex the output, you should
-take a look at the packages \link[kableExtra:kableExtra]{kableExtra::kableExtra}, \strong{xtable}, or
+take a look at the packages \link[kableExtra:kableExtra-package]{kableExtra::kableExtra}, \strong{xtable}, or
 \strong{huxtable}.
 }
 \section{Latex Packages}{
 
 \code{as_latex} requires that the following Latex packages are installed on your
-system:\preformatted{\usepackage{booktabs}
-\usepackage{longtable}
-\usepackage{threeparttablex}
-}
+system:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{\\usepackage\{booktabs\}
+\\usepackage\{longtable\}
+\\usepackage\{threeparttablex\}
+}\if{html}{\out{</div>}}
 }
 
 \examples{
@@ -83,10 +92,11 @@ system:\preformatted{\usepackage{booktabs}
 
 }
 \seealso{
-Other as_latex methods: \code{\link{as_latex.Composite_table}},
-  \code{\link{as_latex.Mashed_table}},
-  \code{\link{as_latex.Tagged_table}},
-  \code{\link{as_latex.Tatoo_report}},
-  \code{\link{as_latex.data.frame}}
+Other as_latex methods: 
+\code{\link{as_latex.Composite_table}()},
+\code{\link{as_latex.Mashed_table}()},
+\code{\link{as_latex.Tagged_table}()},
+\code{\link{as_latex.Tatoo_report}()},
+\code{\link{as_latex.data.frame}()}
 }
 \concept{as_latex methods}

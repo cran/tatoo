@@ -9,11 +9,14 @@
 \usage{
 as_Composite_table(x, ...)
 
-\method{as_Composite_table}{Mashed_table}(x, id_vars = attr(x,
-  "id_vars"), meta = attr(x, "meta"), ...)
+\method{as_Composite_table}{Mashed_table}(
+  x,
+  id_vars = attr(x, "id_vars"),
+  meta = attr(x, "meta"),
+  ...
+)
 
-\method{as_Composite_table}{data.frame}(x, sep = ".", reverse = FALSE,
-  ...)
+\method{as_Composite_table}{data.frame}(x, sep = ".", reverse = FALSE, ...)
 
 is_Composite_table(x, ...)
 }

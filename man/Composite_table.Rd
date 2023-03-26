@@ -68,8 +68,10 @@ comp_table(mean = df_mean, sd = df_sd, id_vars = 'Species')
 \seealso{
 Attribute setter: \link{multinames<-}
 
-Other Tatoo tables: \code{\link{mash_table}},
-  \code{\link{stack_table}}, \code{\link{tag_table}},
-  \code{\link{tatoo_table}}
+Other Tatoo tables: 
+\code{\link{mash_table}()},
+\code{\link{stack_table}()},
+\code{\link{tag_table}()},
+\code{\link{tatoo_table}()}
 }
 \concept{Tatoo tables}

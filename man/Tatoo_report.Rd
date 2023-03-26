@@ -12,7 +12,7 @@ compile_report(...)
 compile_report_list(dat)
 }
 \arguments{
-\item{...}{for compile_table\code{: individual Tatoo_table} or
+\item{...}{for compile_table\verb{: individual Tatoo_table} or
 data.frame` objects}
 
 \item{dat}{for \code{compile_table_list}: A list of containing either

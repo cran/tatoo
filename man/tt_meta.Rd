@@ -5,8 +5,14 @@
 \alias{TT_meta}
 \title{Tagged Table Metadata}
 \usage{
-tt_meta(table_id = NULL, title = NULL, longtitle = title,
-  subtitle = NULL, footer = NULL, .print_table_id = FALSE)
+tt_meta(
+  table_id = NULL,
+  title = NULL,
+  longtitle = title,
+  subtitle = NULL,
+  footer = NULL,
+  .print_table_id = FALSE
+)
 }
 \arguments{
 \item{table_id}{A scalar (will be coerced to \code{character})}

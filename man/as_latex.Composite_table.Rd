@@ -4,8 +4,7 @@
 \alias{as_latex.Composite_table}
 \title{Convert a Composite Table to Latex Code}
 \usage{
-\method{as_latex}{Composite_table}(x, id_vars = id_vars(x), ...,
-  kable_options = default_kable_options())
+\method{as_latex}{Composite_table}(x, id_vars = id_vars(x), ..., kable_options = default_kable_options())
 }
 \arguments{
 \item{x}{a \code{\link{Tatoo_table}}, \code{data.frame} or a list of \code{data.frame}s}
@@ -14,7 +13,9 @@
 using \code{\link[=merge]{merge()}} on the columns specified in \code{id_vars}, otherwise
 the tables will be combined with \code{\link[=cbind]{cbind()}}.}
 
-\item{...}{passed on to methods}
+\item{...}{\code{comp_table()} only: individual \code{data.frames}. A name can be
+provided for each \code{data.frame} that will be used by \code{\link[=print]{print()}} and
+\code{\link[=as_workbook]{as_workbook()}} to create multi-table headings.}
 
 \item{kable_options}{\code{list}. Options passed on to \code{\link[knitr:kable]{knitr::kable()}}. See
 \code{\link[=default_kable_options]{default_kable_options()}} for details.}
@@ -31,9 +32,11 @@ scalar.
 Convert a Composite Table to Latex Code
 }
 \seealso{
-Other as_latex methods: \code{\link{as_latex.Mashed_table}},
-  \code{\link{as_latex.Tagged_table}},
-  \code{\link{as_latex.Tatoo_report}},
-  \code{\link{as_latex.data.frame}}, \code{\link{as_latex}}
+Other as_latex methods: 
+\code{\link{as_latex.Mashed_table}()},
+\code{\link{as_latex.Tagged_table}()},
+\code{\link{as_latex.Tatoo_report}()},
+\code{\link{as_latex.data.frame}()},
+\code{\link{as_latex}()}
 }
 \concept{as_latex methods}

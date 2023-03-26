@@ -4,8 +4,7 @@
 \alias{as_latex.Tagged_table}
 \title{Convert a Tagged Table to Latex Code}
 \usage{
-\method{as_latex}{Tagged_table}(x, ...,
-  kable_options = default_kable_options())
+\method{as_latex}{Tagged_table}(x, ..., kable_options = default_kable_options())
 }
 \arguments{
 \item{x}{a \code{\link{Tatoo_table}}, \code{data.frame} or a list of \code{data.frame}s}
@@ -27,9 +26,11 @@ scalar.
 Convert a Tagged Table to Latex Code
 }
 \seealso{
-Other as_latex methods: \code{\link{as_latex.Composite_table}},
-  \code{\link{as_latex.Mashed_table}},
-  \code{\link{as_latex.Tatoo_report}},
-  \code{\link{as_latex.data.frame}}, \code{\link{as_latex}}
+Other as_latex methods: 
+\code{\link{as_latex.Composite_table}()},
+\code{\link{as_latex.Mashed_table}()},
+\code{\link{as_latex.Tatoo_report}()},
+\code{\link{as_latex.data.frame}()},
+\code{\link{as_latex}()}
 }
 \concept{as_latex methods}

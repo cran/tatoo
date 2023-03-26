@@ -4,8 +4,7 @@
 \alias{as_latex.data.frame}
 \title{Convert a Data Frame to Latex Code}
 \usage{
-\method{as_latex}{data.frame}(x, ...,
-  kable_options = default_kable_options())
+\method{as_latex}{data.frame}(x, ..., kable_options = default_kable_options())
 }
 \arguments{
 \item{x}{a \code{\link{Tatoo_table}}, \code{data.frame} or a list of \code{data.frame}s}
@@ -27,10 +26,11 @@ scalar.
 Convert a Data Frame to Latex Code
 }
 \seealso{
-Other as_latex methods: \code{\link{as_latex.Composite_table}},
-  \code{\link{as_latex.Mashed_table}},
-  \code{\link{as_latex.Tagged_table}},
-  \code{\link{as_latex.Tatoo_report}},
-  \code{\link{as_latex}}
+Other as_latex methods: 
+\code{\link{as_latex.Composite_table}()},
+\code{\link{as_latex.Mashed_table}()},
+\code{\link{as_latex.Tagged_table}()},
+\code{\link{as_latex.Tatoo_report}()},
+\code{\link{as_latex}()}
 }
 \concept{as_latex methods}

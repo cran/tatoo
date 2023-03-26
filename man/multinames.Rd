@@ -10,7 +10,7 @@ multinames(x) <- value
 multinames(x)
 }
 \arguments{
-\item{x}{a \code{Composite_table} \code{or data.frame}}
+\item{x}{a \code{Composite_table} \verb{or data.frame}}
 
 \item{value}{a named vector of ascending integers. The name is the
 multi-column heading, the integer value is the last column that this

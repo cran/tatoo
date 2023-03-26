@@ -6,12 +6,7 @@
 \alias{tatoo-package}
 \title{tatoo: Combine and Export Data Frames}
 \description{
-Functions to combine data.frames in ways that require additional effort in 
-  base R, and to add metadata (id, title, ...) that can be used for printing and 
-  xlsx export. The 'Tatoo_report' class is provided as a 
-  convenient helper to write several such tables to a workbook, one table per 
-  worksheet. Tatoo is built on top of 'openxlsx', but intimate knowledge of 
-  that package is not required to use tatoo.
+Functions to combine data.frames in ways that require additional effort in base R, and to add metadata (id, title, ...) that can be used for printing and xlsx export. The 'Tatoo_report' class is provided as a convenient helper to write several such tables to a workbook, one table per worksheet. Tatoo is built on top of 'openxlsx', but intimate knowledge of that package is not required to use tatoo.
 }
 \section{Functions}{
 

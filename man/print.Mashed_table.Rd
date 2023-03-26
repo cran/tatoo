@@ -4,9 +4,13 @@
 \alias{print.Mashed_table}
 \title{Printing Mashed Tables}
 \usage{
-\method{print}{Mashed_table}(x, mash_method = attr(x, "mash_method"),
-  insert_blank_row = attr(x, "insert_blank_row"), id_vars = attr(x,
-  "id_vars"), ...)
+\method{print}{Mashed_table}(
+  x,
+  mash_method = attr(x, "mash_method"),
+  insert_blank_row = attr(x, "insert_blank_row"),
+  id_vars = attr(x, "id_vars"),
+  ...
+)
 }
 \arguments{
 \item{x}{a Mashed_table}

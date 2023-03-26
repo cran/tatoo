@@ -7,13 +7,25 @@
 \alias{mash_table_list}
 \title{Mash Tables}
 \usage{
-mash_table(..., mash_method = "row", id_vars = NULL,
-  insert_blank_row = FALSE, sep_height = 24, meta = NULL,
-  rem_ext = NULL)
+mash_table(
+  ...,
+  mash_method = "row",
+  id_vars = NULL,
+  insert_blank_row = FALSE,
+  sep_height = 24,
+  meta = NULL,
+  rem_ext = NULL
+)
 
-mash_table_list(tables, mash_method = "row", id_vars = NULL,
-  insert_blank_row = FALSE, sep_height = 24, meta = NULL,
-  rem_ext = NULL)
+mash_table_list(
+  tables,
+  mash_method = "row",
+  id_vars = NULL,
+  insert_blank_row = FALSE,
+  sep_height = 24,
+  meta = NULL,
+  rem_ext = NULL
+)
 }
 \arguments{
 \item{...}{\code{mash_table()} only: \code{data.frames} with the same row and column
@@ -117,8 +129,10 @@ mash_table(
 \seealso{
 Attribute setters: \link{mash_method<-}
 
-Other Tatoo tables: \code{\link{comp_table}},
-  \code{\link{stack_table}}, \code{\link{tag_table}},
-  \code{\link{tatoo_table}}
+Other Tatoo tables: 
+\code{\link{comp_table}()},
+\code{\link{stack_table}()},
+\code{\link{tag_table}()},
+\code{\link{tatoo_table}()}
 }
 \concept{Tatoo tables}

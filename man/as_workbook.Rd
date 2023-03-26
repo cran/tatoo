@@ -47,7 +47,7 @@ vary depending on which \code{Tatoo_table} you want to export.
 to an \file{xlsx} file.
 
 \code{view_xlsx()} is another wrapper for viewing a \code{Tatoo_table}"s
-\file{xlsx} representation in your favourite spreadsheet program (powered by
+\file{xlsx} representation in your favorite spreadsheet program (powered by
 \code{\link[openxlsx:openXL]{openxlsx::openXL()}}).
 }
 \examples{
@@ -72,6 +72,7 @@ save_xlsx(dat, tempfile(fileext = ".xlsx"), overwrite = TRUE)
 
 }
 \seealso{
-Other xlsx exporters: \code{\link{write_worksheet}}
+Other xlsx exporters: 
+\code{\link{write_worksheet}()}
 }
 \concept{xlsx exporters}

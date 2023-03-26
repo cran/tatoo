@@ -9,7 +9,8 @@
 \arguments{
 \item{x}{a \code{\link{Tatoo_table}}, \code{data.frame} or a list of \code{data.frame}s}
 
-\item{...}{passed on to methods}
+\item{...}{for compile_table\verb{: individual Tatoo_table} or
+data.frame` objects}
 }
 \value{
 \code{as_latex()}returns a \code{character} scalar of Latex code
@@ -23,9 +24,11 @@ scalar.
 Convert a Tatoo Report to Latex Code
 }
 \seealso{
-Other as_latex methods: \code{\link{as_latex.Composite_table}},
-  \code{\link{as_latex.Mashed_table}},
-  \code{\link{as_latex.Tagged_table}},
-  \code{\link{as_latex.data.frame}}, \code{\link{as_latex}}
+Other as_latex methods: 
+\code{\link{as_latex.Composite_table}()},
+\code{\link{as_latex.Mashed_table}()},
+\code{\link{as_latex.Tagged_table}()},
+\code{\link{as_latex.data.frame}()},
+\code{\link{as_latex}()}
 }
 \concept{as_latex methods}

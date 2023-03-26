@@ -4,10 +4,15 @@
 \alias{as_latex.Mashed_table}
 \title{Convert a Mashed Table to Latex Code}
 \usage{
-\method{as_latex}{Mashed_table}(x, mash_method = attr(x, "mash_method"),
-  id_vars = attr(x, "id_vars"), insert_blank_row = attr(x,
-  "insert_blank_row"), sep_height = attr(x, "sep_height"), ...,
-  kable_options = default_kable_options())
+\method{as_latex}{Mashed_table}(
+  x,
+  mash_method = attr(x, "mash_method"),
+  id_vars = attr(x, "id_vars"),
+  insert_blank_row = attr(x, "insert_blank_row"),
+  sep_height = attr(x, "sep_height"),
+  ...,
+  kable_options = default_kable_options()
+)
 }
 \arguments{
 \item{x}{a \code{\link{Tatoo_table}}, \code{data.frame} or a list of \code{data.frame}s}
@@ -27,7 +32,9 @@ character.} Use with care.}
 \code{insert_blank_row == TRUE}, height of the inserted row, else height of the
 top row of each mash-group.}
 
-\item{...}{passed on to methods}
+\item{...}{\code{mash_table()} only: \code{data.frames} with the same row and column
+count. Elements of \code{(...)} can be named, but the name must differ from
+the argument names of this function.}
 
 \item{kable_options}{\code{list}. Options passed on to \code{\link[knitr:kable]{knitr::kable()}}. See
 \code{\link[=default_kable_options]{default_kable_options()}} for details.}
@@ -44,9 +51,11 @@ scalar.
 Convert a Mashed Table to Latex Code
 }
 \seealso{
-Other as_latex methods: \code{\link{as_latex.Composite_table}},
-  \code{\link{as_latex.Tagged_table}},
-  \code{\link{as_latex.Tatoo_report}},
-  \code{\link{as_latex.data.frame}}, \code{\link{as_latex}}
+Other as_latex methods: 
+\code{\link{as_latex.Composite_table}()},
+\code{\link{as_latex.Tagged_table}()},
+\code{\link{as_latex.Tatoo_report}()},
+\code{\link{as_latex.data.frame}()},
+\code{\link{as_latex}()}
 }
 \concept{as_latex methods}

@@ -11,7 +11,7 @@ tatoo_table(dat)
 \item{dat}{an object of any of the classes listed in the description}
 }
 \description{
-\code{Tatto_table} is the superclass of all the \code{*_table} classes made available
+\code{Tatto_table} is the superclass of all the \verb{*_table} classes made available
 by this package. Each \code{Tatoo_table} provides a different way of combining
 several tables (data.frames) into a single table. Those tables can then
 be exported via \code{\link[=as_workbook]{as_workbook()}}/\code{\link[=save_xlsx]{save_xlsx()}}. In the future, support for
@@ -31,8 +31,10 @@ will not need to use it except if your planning on extending this package
 with your own code.
 }
 \seealso{
-Other Tatoo tables: \code{\link{comp_table}},
-  \code{\link{mash_table}}, \code{\link{stack_table}},
-  \code{\link{tag_table}}
+Other Tatoo tables: 
+\code{\link{comp_table}()},
+\code{\link{mash_table}()},
+\code{\link{stack_table}()},
+\code{\link{tag_table}()}
 }
 \concept{Tatoo tables}

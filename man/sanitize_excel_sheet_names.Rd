@@ -20,10 +20,10 @@ Convert a vector to valid excel sheet names by:
 \itemize{
 \item trimming names down to 31 characters,
 \item ensuring each element of the vector is unique, and
-\item removing the illegal characters \code{\ / * [ ] : ?}
+\item removing the illegal characters \verb{\\ / * [ ] : ?}
 }
 
-[ ]: R:%20
+[ ]: R:\%20
 }
 \examples{
 

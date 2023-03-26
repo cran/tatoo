@@ -8,28 +8,66 @@
 \alias{write_worksheet.Stacked_table}
 \title{Write Data to an openxlsx Worksheet}
 \usage{
-write_worksheet(x, wb, sheet, append = FALSE, start_row = 1L, ...,
-  named_regions = TRUE, named_regions_prefix = NA_character_)
+write_worksheet(
+  x,
+  wb,
+  sheet,
+  append = FALSE,
+  start_row = 1L,
+  ...,
+  named_regions = TRUE,
+  named_regions_prefix = NA_character_
+)
 
-\method{write_worksheet}{Tagged_table}(x, wb,
+\method{write_worksheet}{Tagged_table}(
+  x,
+  wb,
   sheet = sanitize_excel_sheet_names(attr(x, "meta")$table_id),
-  append = FALSE, start_row = 1L, ..., print_table_id = attr(x,
-  "meta")[[".print_table_id"]], named_regions = TRUE,
-  named_regions_prefix = NA_character_)
+  append = FALSE,
+  start_row = 1L,
+  ...,
+  print_table_id = attr(x, "meta")[[".print_table_id"]],
+  named_regions = TRUE,
+  named_regions_prefix = NA_character_
+)
 
-\method{write_worksheet}{Composite_table}(x, wb, sheet, append = FALSE,
-  start_row = 1L, ..., named_regions = TRUE,
-  named_regions_prefix = NA_character_)
+\method{write_worksheet}{Composite_table}(
+  x,
+  wb,
+  sheet,
+  append = FALSE,
+  start_row = 1L,
+  ...,
+  named_regions = TRUE,
+  named_regions_prefix = NA_character_
+)
 
-\method{write_worksheet}{Mashed_table}(x, wb, sheet, append = FALSE,
-  start_row = 1L, mash_method = attr(x, "mash_method"),
-  id_vars = attr(x, "id_vars"), insert_blank_row = attr(x,
-  "insert_blank_row"), sep_height = attr(x, "sep_height"), ...,
-  named_regions = TRUE, named_regions_prefix = NA_character_)
+\method{write_worksheet}{Mashed_table}(
+  x,
+  wb,
+  sheet,
+  append = FALSE,
+  start_row = 1L,
+  mash_method = attr(x, "mash_method"),
+  id_vars = attr(x, "id_vars"),
+  insert_blank_row = attr(x, "insert_blank_row"),
+  sep_height = attr(x, "sep_height"),
+  ...,
+  named_regions = TRUE,
+  named_regions_prefix = NA_character_
+)
 
-\method{write_worksheet}{Stacked_table}(x, wb, sheet, append = FALSE,
-  start_row = 1L, spacing = attr(x, "spacing"), ...,
-  named_regions = TRUE, named_regions_prefix = NA_character_)
+\method{write_worksheet}{Stacked_table}(
+  x,
+  wb,
+  sheet,
+  append = FALSE,
+  start_row = 1L,
+  spacing = attr(x, "spacing"),
+  ...,
+  named_regions = TRUE,
+  named_regions_prefix = NA_character_
+)
 }
 \arguments{
 \item{x}{A \code{Tatoo_table}.}
@@ -88,6 +126,7 @@ package, but rather than just writing \code{data.frames},
 \code{\link{Tatoo_table}} subclasses.
 }
 \seealso{
-Other xlsx exporters: \code{\link{as_workbook}}
+Other xlsx exporters: 
+\code{\link{as_workbook}()}
 }
 \concept{xlsx exporters}

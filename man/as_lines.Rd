@@ -17,9 +17,14 @@ as_lines(x, color = TRUE, ...)
 
 \method{as_lines}{Tagged_table}(x, color = TRUE, ...)
 
-\method{as_lines}{Mashed_table}(x, color = TRUE, mash_method = attr(x,
-  "mash_method"), insert_blank_row = attr(x, "insert_blank_row"),
-  id_vars = attr(x, "id_vars"), ...)
+\method{as_lines}{Mashed_table}(
+  x,
+  color = TRUE,
+  mash_method = attr(x, "mash_method"),
+  insert_blank_row = attr(x, "insert_blank_row"),
+  id_vars = attr(x, "id_vars"),
+  ...
+)
 
 \method{as_lines}{Stacked_table}(x, color = TRUE, ...)
 
